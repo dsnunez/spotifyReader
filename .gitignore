@@ -277,3 +277,4 @@ paket-files/
 __pycache__/
 *.pyc
 
+*.db
