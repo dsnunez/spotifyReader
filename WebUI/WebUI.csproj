@@ -231,6 +231,8 @@
     <Content Include="images\twitter.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="keys.config" />
+    <Content Include="keys.sample.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -282,6 +284,10 @@
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">
       <Project>{13f09922-d7a7-4005-aeaf-df060c79ae00}</Project>
       <Name>DomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpotifyMetadata\SpotifyMetadata.csproj">
+      <Project>{D60009E3-5288-4077-AE47-4EEF598FE30B}</Project>
+      <Name>SpotifyMetadata</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

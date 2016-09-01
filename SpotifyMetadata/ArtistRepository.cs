@@ -16,5 +16,15 @@ namespace SpotifyMetadata
             var artist = db.Artists.FirstOrDefault(a => a.Name == name) ?? api.FindArtistByName(name);
             return artist;
         }
+
+        public List<Artist> GetAllDownloadedArtists()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Artist GetArtistById(int? id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

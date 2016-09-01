@@ -278,3 +278,5 @@ __pycache__/
 *.pyc
 
 *.db
+/SpotifyMetadata/keys.config
+/WebUI/keys.config
