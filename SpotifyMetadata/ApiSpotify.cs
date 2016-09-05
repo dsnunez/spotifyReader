@@ -7,6 +7,8 @@ using DomainModel;
 using System.Configuration;
 using System.Collections.Specialized;
 using System.Net;
+using SpotifyMetadata.ResponseModels;
+using Newtonsoft.Json;
 
 namespace SpotifyMetadata
 {
@@ -30,12 +32,17 @@ namespace SpotifyMetadata
             return response;
         }
 
-        internal Artist FindArtistByName(string name)
+        internal List<Artist> FindArtistByName(string name)
         {
             name = "attalus";
-            var req = String.Format("search/?q={0}&type=artist", name);
-            var response = ApiGetRequest(req);
-            return null;
+            if (!String.IsNullOrWhiteSpace(name))
+            {
+                var req = String.Format("search/?q={0}&type=artist", name);
+                var response = ApiGetRequest(req);
+                var artistResult = JsonConvert.DeserializeObject<ArtistResult>(response);
+                return null;
+            }
+            else return new List<Artist>();
         }
     }
 }

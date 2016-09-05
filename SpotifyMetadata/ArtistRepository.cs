@@ -11,9 +11,9 @@ namespace SpotifyMetadata
     {
         SpotifyContext db = new SpotifyContext();
         ApiSpotify api = new ApiSpotify();
-        public Artist GetArtistByName(string name)
+        public List<Artist> GetArtistByName(string name)
         {
-            var artist = db.Artists.FirstOrDefault(a => a.Name == name) ?? api.FindArtistByName(name);
+            var artist = db.Artists.Where(a => a.Name == name).ToList<Artist>() ?? api.FindArtistByName(name);
             return artist;
         }
 
