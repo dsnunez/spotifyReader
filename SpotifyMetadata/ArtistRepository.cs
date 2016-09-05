@@ -11,16 +11,25 @@ namespace SpotifyMetadata
     {
         SpotifyContext db = new SpotifyContext();
         ApiSpotify api = new ApiSpotify();
-        public List<Artist> GetArtistByName(string name)
+        public ArtistSearchResult SearchArtistByName(string name)
         {
-            var artist = db.Artists.Where(a => a.Name == name).ToList<Artist>() ?? api.FindArtistByName(name);
-            return artist;
+            ArtistSearchResult result = new ArtistSearchResult();
+            result.DownloadedMatches = db.Artists.Where(a => a.Name == name).ToList<Artist>();
+
+            var apiMatches = api.FindArtistByName(name);
+            var excludedIDs = new HashSet<string>(result.DownloadedMatches.Select(r => r.SpotifyId));
+            result.NotDownloadedMatches = (from m in apiMatches
+                                          where !excludedIDs.Contains(m.id)
+                                          select new Artist { SpotifyId = m.id, Name = m.name })
+                                          .ToList();
+
+            return result;
         }
 
         public List<Artist> GetAllDownloadedArtists()
         {
-            api.FindArtistByName("");
-            return new List<Artist>();
+            SearchArtistByName("attalus");
+            return db.Artists.ToList();
         }
 
         public Artist GetArtistById(int? id)

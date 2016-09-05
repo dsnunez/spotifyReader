@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpotifyMetadata.ResponseModels
 {
-    public class ArtistResult
+    public class ArtistJsonResult
     {
         public Artists artists { get; set; }
     }

@@ -32,17 +32,16 @@ namespace SpotifyMetadata
             return response;
         }
 
-        internal List<Artist> FindArtistByName(string name)
+        internal List<ResponseModels.Item> FindArtistByName(string name)
         {
-            name = "attalus";
             if (!String.IsNullOrWhiteSpace(name))
             {
                 var req = String.Format("search/?q={0}&type=artist", name);
                 var response = ApiGetRequest(req);
-                var artistResult = JsonConvert.DeserializeObject<ArtistResult>(response);
-                return null;
+                var artistJsonResult = JsonConvert.DeserializeObject<ArtistJsonResult>(response);
+                return artistJsonResult.artists.items;
             }
-            else return new List<Artist>();
+            else return new List<ResponseModels.Item>();
         }
     }
 }
