@@ -7,5 +7,10 @@ namespace SpotifyMetadata
     {
         public List<Artist> DownloadedMatches { get; internal set; }
         public List<Artist> NotDownloadedMatches { get; internal set; }
+
+        public ArtistSearchResult()
+        {
+            DownloadedMatches = new List<Artist>();
+        }
     }
 }

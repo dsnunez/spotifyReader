@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SpotifyMetadata
@@ -11,12 +12,23 @@ namespace SpotifyMetadata
     {
         SpotifyContext db = new SpotifyContext();
         ApiSpotify api = new ApiSpotify();
-        public ArtistSearchResult SearchArtistByName(string name)
+        public ArtistSearchResult SearchArtist(string query)
         {
             ArtistSearchResult result = new ArtistSearchResult();
-            result.DownloadedMatches = db.Artists.Where(a => a.Name == name).ToList<Artist>();
+            query = query.ToLower();
 
-            var apiMatches = api.FindArtistByName(name);
+            //Separar la query entre palabras sueltas y frases entre comillas, para que se parezca al comportamiento de la API
+            var queryParts = (from Match match in Regex.Matches(query, @"[\""].+?[\""]|[^ ]+")
+                             select match.ToString()).ToList();
+
+
+            foreach (var q in queryParts)
+            {
+                var part = q.Trim('"');
+                result.DownloadedMatches.AddRange(db.Artists
+                    .Where(a => a.Name.ToLower().Contains(part)).ToList<Artist>()); ;
+            }
+            var apiMatches = api.SearchArtist(query);
             var excludedIDs = new HashSet<string>(result.DownloadedMatches.Select(r => r.SpotifyId));
             result.NotDownloadedMatches = (from m in apiMatches
                                           where !excludedIDs.Contains(m.id)
@@ -28,7 +40,7 @@ namespace SpotifyMetadata
 
         public List<Artist> GetAllDownloadedArtists()
         {
-            SearchArtistByName("attalus");
+            SearchArtist("\"arrows and\" sound");
             return db.Artists.ToList();
         }
 
