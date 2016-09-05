@@ -21,6 +21,11 @@ namespace spotifyAcid.Controllers
             return View(repo.GetAllDownloadedArtists());
         }
 
+        public ActionResult Search(string q)
+        {
+            return View("Index", repo.SearchArtist(q).NotDownloadedMatches);
+        }
+
         // GET: Artists/Details/5
         public ActionResult Details(int? id)
         {

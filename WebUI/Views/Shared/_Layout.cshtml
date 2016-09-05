@@ -14,10 +14,8 @@
         <div class="wrap">
             <div class="menu">
                 <ul class="nav">
-                    <li class="active"><a href="index.html">Home</a></li>
-                    <li><a href="artists.html">Artists</a></li>
-                    <li><a href="specials.html">Specials</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Artistas descargados","Index","Artists")</li>
                 </ul>
             </div>
             
@@ -28,14 +26,15 @@
         <div class="wrap">
             <div class="header">
                 <div class="logo">
-                    <a href="index.html"><img src="images/logo.png" alt="" title="logo"></a>
+                    <a href="index.html"><img src="~/images/logo.png" alt="" title="logo"></a>
                 </div>
                 
                 <div class="foot-search">
-                    <form>
-                        <input type="text" value="keyword here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'keyword here';}">
-                        <input type="submit" value="Search">
-                    </form>
+                    @using (Html.BeginForm("Search", "Artists"))
+                    {
+                        <input type="text" name="q" value="buscar artista" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'buscar artista';}">
+                        <input type="submit" value="Buscar">
+                    }
                 </div>
                 <div class="clear"></div>
             </div>

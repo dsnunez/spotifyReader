@@ -1,6 +1,13 @@
 ﻿body {
     padding-top: 50px;
-    padding-bottom: 20px;
+    padding:10px;
+   padding-bottom:60px;   /* Height of the footer */
+}
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
 }
 
 /* Set padding to keep content from hitting the edges */
