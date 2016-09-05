@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DomainModel;
 using System.Configuration;
 using System.Collections.Specialized;
+using System.Net;
 
 namespace SpotifyMetadata
 {
@@ -13,6 +14,7 @@ namespace SpotifyMetadata
     {
         string ClientId { get; set; }
         string ClientSecret { get; set; }
+        string BaseUrl = "https://api.spotify.com/v1/";
 
         public ApiSpotify()
         {
@@ -21,9 +23,19 @@ namespace SpotifyMetadata
             ClientSecret = settings["SpotifyClientSecret"];
         }
 
+        string ApiGetRequest(string req)
+        {
+            WebClient client = new WebClient();
+            var response = client.DownloadString(BaseUrl + req);
+            return response;
+        }
+
         internal Artist FindArtistByName(string name)
         {
-            throw new NotImplementedException();
+            name = "attalus";
+            var req = String.Format("search/?q={0}&type=artist", name);
+            var response = ApiGetRequest(req);
+            return null;
         }
     }
 }

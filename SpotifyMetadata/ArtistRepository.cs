@@ -19,7 +19,8 @@ namespace SpotifyMetadata
 
         public List<Artist> GetAllDownloadedArtists()
         {
-            throw new NotImplementedException();
+            api.FindArtistByName("");
+            return new List<Artist>();
         }
 
         public Artist GetArtistById(int? id)
