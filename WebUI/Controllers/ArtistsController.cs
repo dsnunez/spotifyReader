@@ -59,13 +59,13 @@ namespace spotifyAcid.Controllers
             return View("Details", artist);
         }
 
-        public ActionResult Download(string spotifyId)
+        public ActionResult Download(string id)
         {
-            if (String.IsNullOrWhiteSpace(spotifyId))
+            if (String.IsNullOrWhiteSpace(id))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Artist artist = repo.DownloadArtistInfo(spotifyId);
+            Artist artist = repo.DownloadArtistInfo(id);
             return View("Details", artist);
         }
     }

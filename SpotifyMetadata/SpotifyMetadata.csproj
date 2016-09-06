@@ -67,6 +67,7 @@
     <Compile Include="ResponseModels\Full\Album.cs" />
     <Compile Include="ResponseModels\Full\Artist.cs" />
     <Compile Include="ResponseModels\SearchArtistJsonResult.cs" />
+    <Compile Include="ResponseModels\Simplified\Album.cs" />
     <Compile Include="ResponseModels\Simplified\Artist.cs" />
     <Compile Include="ResponseModels\Simplified\Track.cs" />
   </ItemGroup>

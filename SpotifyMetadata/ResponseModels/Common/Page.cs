@@ -11,9 +11,9 @@ namespace SpotifyMetadata.ResponseModels.Common
         public string href { get; set; }
         public List<T> items { get; set; }
         public int limit { get; set; }
-        public object next { get; set; }
+        public string next { get; set; }
         public int offset { get; set; }
-        public object previous { get; set; }
+        public string previous { get; set; }
         public int total { get; set; }
     }
 }

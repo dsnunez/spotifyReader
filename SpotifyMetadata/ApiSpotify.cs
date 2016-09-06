@@ -25,11 +25,20 @@ namespace SpotifyMetadata
             ClientSecret = settings["SpotifyClientSecret"];
         }
 
-        string ApiGetRequest(string req)
+        string ApiGetRequest(string req, bool useBaseUrl = true)
         {
             WebClient client = new WebClient();
-            var response = client.DownloadString(BaseUrl + req);
+            var response = useBaseUrl ? client.DownloadString(BaseUrl + req): client.DownloadString(req);
             return response;
+        }
+
+        T GetObjectFromJson<T>(string json)
+        {
+            if (!String.IsNullOrWhiteSpace(json))
+            {
+                return JsonConvert.DeserializeObject<T>(json);
+            }
+            return default(T);
         }
 
         internal List<ResponseModels.Full.Artist> SearchArtist(string query)
@@ -41,16 +50,35 @@ namespace SpotifyMetadata
 
                 var req = String.Format("search/?q={0}&type=artist", query);
                 var response = ApiGetRequest(req);
-                var artistJsonResult = JsonConvert.DeserializeObject<ResponseModels.SearchArtist.SearchArtistJsonResult>(response);
+                var artistJsonResult = GetObjectFromJson<ResponseModels.SearchArtist.SearchArtistJsonResult>(response);
                 return artistJsonResult.artists.items;
             }
             else return new List<ResponseModels.Full.Artist>();
         }
 
-        internal object DownloadArtist(string spotifyId)
+        internal ResponseModels.Full.Artist DownloadArtistData(string spotifyArtistId)
         {
-            throw new NotImplementedException();
+            var req = String.Format("artists/{0}", spotifyArtistId);
+            var response = ApiGetRequest(req);
+            var artist = GetObjectFromJson<ResponseModels.Full.Artist>(response);
+            return artist;
+        }
+
+        internal List<ResponseModels.Simplified.Album> DownloadArtistAlbums(string spotifyArtistId)
+        {
+            var req = String.Format("artists/{0}/albums", spotifyArtistId);
+            var response = ApiGetRequest(req);
+            var page = GetObjectFromJson<ResponseModels.Common.Page<ResponseModels.Simplified.Album>>(response);
+            List<ResponseModels.Simplified.Album> albums = new List<ResponseModels.Simplified.Album>();
+            albums.AddRange(page.items);
+            while(page != null && !String.IsNullOrEmpty(page.next))
+            {
+                response = ApiGetRequest(page.next, useBaseUrl: false);
+                page = GetObjectFromJson<ResponseModels.Common.Page<ResponseModels.Simplified.Album>>(response);
+                albums.AddRange(page.items);
+            }
+
+            return albums;
         }
     }
 }
-;

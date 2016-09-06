@@ -51,7 +51,8 @@ namespace SpotifyMetadata
 
         public Artist DownloadArtistInfo(string spotifyId)
         {
-            var response = api.DownloadArtist(spotifyId);
+            var artistData = api.DownloadArtistData(spotifyId);
+            var albumsData = api.DownloadArtistAlbums(spotifyId);
             return null;
         }
 
