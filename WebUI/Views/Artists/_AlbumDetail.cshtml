@@ -1,48 +1,40 @@
 ﻿@model DomainModel.Album
 
-<div>
-    <h4>@Html.DisplayFor(model => model.Artist.Name)</h4>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.SpotifyId)
-        </dt>
+<div class="single">
+    <div class="grid-img1">
+        <a href="@Model.ImageUrl"><img src="@Model.ImageUrl" height="150" width="150"></a>
+    </div>
+    <div class="para">
+        <h4>@Html.DisplayFor(model => model.Name)</h4>
+        <div class="cart-b">
 
-        <dd>
-            @Html.DisplayFor(model => model.SpotifyId)
-        </dd>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Year)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Year)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Popularity)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Year)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Popularity)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Year)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Popularity)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Popularity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageUrl)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImageUrl)
-        </dd>
-
-    </dl>
-    @{Html.RenderPartial("_TrackList", Model.Tracks);}
+            </dl>
+        </div>
+        <div>
+            @{Html.RenderPartial("_TrackList", Model.Tracks);}
+        </div>
+    </div>
+    <div class="clear"></div>
 </div>
+
+
+

@@ -33,7 +33,7 @@ namespace DomainModel
                 int totalSeconds = (int)TimeSpan.FromMilliseconds(DurationMS).TotalSeconds;
                 int seconds = totalSeconds - minutes * 60;
 
-                return String.Format("{0}:{1}", minutes, seconds);
+                return String.Format("{0:00}:{1:00}", minutes, seconds);
             }
         }
     }

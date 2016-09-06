@@ -10,8 +10,13 @@
     @Html.ActionLink("Actualizar", "Update", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+<div class="section group">
+    <div class="cont">
+        @foreach (var album in Model.Albums)
+        {
+            Html.RenderPartial("_AlbumDetail", album);
+        }
+    </div>
+</div>
 
-@foreach (var album in Model.Albums)
-{
-    Html.RenderPartial("_AlbumDetail", album);
-}
+
