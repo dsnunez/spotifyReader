@@ -1,0 +1,54 @@
+﻿@model IEnumerable<DomainModel.Track>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Album.SpotifyId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpotifyId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiscNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TrackNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Popularity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DurationMS)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Album.SpotifyId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpotifyId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiscNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrackNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Popularity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DurationMS)
+        </td>
+    </tr>
+}
+
+</table>

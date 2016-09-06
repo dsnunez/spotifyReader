@@ -4,23 +4,14 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@Html.DisplayFor(model => model.Name)</h2>
 
-<div>
-    <h4>Artist</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-    </dl>
-</div>
 <p>
     @Html.ActionLink("Actualizar", "Update", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@foreach (var album in Model.Albums)
+{
+    Html.RenderPartial("_AlbumDetail", album);
+}

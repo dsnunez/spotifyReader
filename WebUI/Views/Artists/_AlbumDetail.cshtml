@@ -1,0 +1,48 @@
+﻿@model DomainModel.Album
+
+<div>
+    <h4>@Html.DisplayFor(model => model.Artist.Name)</h4>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SpotifyId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpotifyId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Popularity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Popularity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageUrl)
+        </dd>
+
+    </dl>
+    @{Html.RenderPartial("_TrackList", Model.Tracks);}
+</div>

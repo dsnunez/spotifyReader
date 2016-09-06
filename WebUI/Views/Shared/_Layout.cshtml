@@ -32,10 +32,10 @@
 
                     <div class="foot-search">
                         @using (Html.BeginForm("Search", "Artists"))
-                    {
-                    <input type="text" name="q" value="buscar artista" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'buscar artista';}">
-                    <input type="submit" value="Buscar">
-                    }
+                        {
+                            <input type="text" name="q" value="buscar artista" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'buscar artista';}">
+                            <input type="submit" value="Buscar">
+                        }
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -45,7 +45,9 @@
         <div class="content-bg">
             <div class="wrap">
                 <div class="main">
-                    @RenderBody()
+                    <div class="content">
+                        @RenderBody()
+                    </div>
                     <div class="clear"></div>
                 </div>
             </div>
@@ -58,7 +60,7 @@
             </div>
         </div>
     </div>
-    
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
