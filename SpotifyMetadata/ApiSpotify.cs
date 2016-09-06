@@ -32,7 +32,7 @@ namespace SpotifyMetadata
             return response;
         }
 
-        internal List<ResponseModels.Item> SearchArtist(string query)
+        internal List<ResponseModels.Full.Artist> SearchArtist(string query)
         {
             if (!String.IsNullOrWhiteSpace(query))
             {
@@ -41,10 +41,15 @@ namespace SpotifyMetadata
 
                 var req = String.Format("search/?q={0}&type=artist", query);
                 var response = ApiGetRequest(req);
-                var artistJsonResult = JsonConvert.DeserializeObject<ArtistJsonResult>(response);
+                var artistJsonResult = JsonConvert.DeserializeObject<ResponseModels.SearchArtist.SearchArtistJsonResult>(response);
                 return artistJsonResult.artists.items;
             }
-            else return new List<ResponseModels.Item>();
+            else return new List<ResponseModels.Full.Artist>();
+        }
+
+        internal object DownloadArtist(string spotifyId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

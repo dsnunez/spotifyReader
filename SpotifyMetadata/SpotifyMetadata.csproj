@@ -58,7 +58,17 @@
     <Compile Include="ArtistRepository.cs" />
     <Compile Include="ArtistSearchResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResponseModels\ArtistJsonResult.cs" />
+    <Compile Include="ResponseModels\Common\ExternalIds.cs" />
+    <Compile Include="ResponseModels\Common\ExternalUrls.cs" />
+    <Compile Include="ResponseModels\Common\Followers.cs" />
+    <Compile Include="ResponseModels\Common\Image.cs" />
+    <Compile Include="ResponseModels\Common\Page.cs" />
+    <Compile Include="ResponseModels\Common\Copyright.cs" />
+    <Compile Include="ResponseModels\Full\Album.cs" />
+    <Compile Include="ResponseModels\Full\Artist.cs" />
+    <Compile Include="ResponseModels\SearchArtistJsonResult.cs" />
+    <Compile Include="ResponseModels\Simplified\Artist.cs" />
+    <Compile Include="ResponseModels\Simplified\Track.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">

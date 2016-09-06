@@ -51,7 +51,8 @@ namespace SpotifyMetadata
 
         public Artist DownloadArtistInfo(string spotifyId)
         {
-            throw new NotImplementedException();
+            var response = api.DownloadArtist(spotifyId);
+            return null;
         }
 
         public Artist GetArtistById(int? id)
