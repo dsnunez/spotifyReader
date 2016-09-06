@@ -6,26 +6,33 @@
     </div>
     <div class="para">
         <h4>@Html.DisplayFor(model => model.Name)</h4>
+        <h5>@Html.DisplayFor(model => model.Year)</h5>
         <div class="cart-b">
 
             <dl class="dl-horizontal">
                 <dt>
-                    @Html.DisplayNameFor(model => model.Year)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Year)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Popularity)
+                    Popularidad del álbum
                 </dt>
 
                 <dd>
                     @Html.DisplayFor(model => model.Popularity)
                 </dd>
 
+                <dt>
+                    Popularidad promedio de las canciones
+                </dt>
 
+                <dd>
+                    @Html.DisplayFor(model => model.AvgTrackPopularity)
+                </dd>
+
+                <dt>
+                   Canción más larga
+                </dt>
+
+                <dd>
+                    @Model.LongestTrack.Name (@Model.LongestTrack.DurationStringMMSS)
+                </dd>
 
             </dl>
         </div>

@@ -20,13 +20,41 @@ namespace DomainModel
 
         public double Popularity { get; set; }
 
+        [NotMapped]
+        public double AvgTrackPopularity
+        {
+            get
+            {
+                if (Tracks != null && Tracks.Count() > 0)
+                {
+                    return (from t in Tracks select t.Popularity).Average();
+                }
+                return 0;
+            }
+        }
+
         public string ImageUrl { get; set; }
 
         public int ArtistId { get; set; }
         [ForeignKey("ArtistId")]
-        public virtual Artist Artist{get;set;}
+        public virtual Artist Artist { get; set; }
 
         [InverseProperty("Album")]
-        public virtual List<Track> Tracks{get;set;}
+        public virtual List<Track> Tracks { get; set; }
+
+        [NotMapped]
+        public Track LongestTrack
+        {
+            get
+            {
+                if (Tracks != null && Tracks.Count() > 0)
+                {
+                    return Tracks.Aggregate((currentMax, x) =>
+                            (currentMax == null || x.DurationMS > currentMax.DurationMS ? x : currentMax));
+                    
+                }
+                return null;
+            }
+        }
     }
 }

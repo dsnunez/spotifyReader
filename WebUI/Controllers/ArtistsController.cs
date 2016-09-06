@@ -42,6 +42,7 @@ namespace spotifyAcid.Controllers
             {
                 return HttpNotFound();
             }
+            artist.Albums = artist.Albums.OrderByDescending(a => a.Year).ToList();
             return View(artist);
         }
 

@@ -1,31 +1,25 @@
 ﻿@model IEnumerable<DomainModel.Track>
 
-<table class="table">
+<table class="table table-condensed">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.DiscNumber)
+            #
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TrackNumber)
+            Canción
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            Popularidad
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Popularity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DurationStringMMSS)
+            Duración
         </th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.DiscNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TrackNumber)
+            @String.Format("{0:00}",item.TrackNumber)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
