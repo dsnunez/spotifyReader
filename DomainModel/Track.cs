@@ -12,7 +12,7 @@ namespace DomainModel
     {
         [Key]
         public int Id { get; set; }
-
+        public string SpotifyId { get; set; }
 
         public int AlbumId { get; set; }
         [ForeignKey("AlbumId")]

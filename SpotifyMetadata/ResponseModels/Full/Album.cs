@@ -20,6 +20,20 @@ namespace SpotifyMetadata.ResponseModels.Full
         public string href { get; set; }
         public string id { get; set; }
         public List<Image> images { get; set; }
+        public string MainImageUrl
+        {
+            get
+            {
+                if (images == null || images.Count() == 0)
+                {
+                    return "";
+                }
+                else
+                {
+                    return images.First().url;
+                }
+            }
+        }
         public string name { get; set; }
         public int popularity { get; set; }
         public string release_date { get; set; }
@@ -27,5 +41,16 @@ namespace SpotifyMetadata.ResponseModels.Full
         public Page<Track> tracks { get; set; }
         public string type { get; set; }
         public string uri { get; set; }
+        public int Year
+        {
+            get
+            {
+                int year = 0;
+                string[] dateArr = release_date.Split('-');
+                if (dateArr.Length > 0)
+                    int.TryParse(dateArr[0], out year);
+                return year;
+            }
+        }
     }
 }

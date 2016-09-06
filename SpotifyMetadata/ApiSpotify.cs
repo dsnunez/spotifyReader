@@ -56,7 +56,7 @@ namespace SpotifyMetadata
             else return new List<ResponseModels.Full.Artist>();
         }
 
-        internal ResponseModels.Full.Artist DownloadArtistData(string spotifyArtistId)
+        internal ResponseModels.Full.Artist DownloadArtistFullData(string spotifyArtistId)
         {
             var req = String.Format("artists/{0}", spotifyArtistId);
             var response = ApiGetRequest(req);
@@ -79,6 +79,14 @@ namespace SpotifyMetadata
             }
 
             return albums;
+        }
+
+        internal ResponseModels.Full.Album DownloadAlbumFullData(string id)
+        {
+            var req = String.Format("albums/{0}", id);
+            var response = ApiGetRequest(req);
+            var album = GetObjectFromJson<ResponseModels.Full.Album>(response);
+            return album;
         }
     }
 }

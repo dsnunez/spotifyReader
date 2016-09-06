@@ -19,7 +19,7 @@ namespace SpotifyMetadata
 
             //Separar la query entre palabras sueltas y frases entre comillas, para que se parezca al comportamiento de la API
             var queryParts = (from Match match in Regex.Matches(query, @"[\""].+?[\""]|[^ ]+")
-                             select match.ToString()).ToList();
+                              select match.ToString()).ToList();
 
 
             foreach (var q in queryParts)
@@ -31,8 +31,8 @@ namespace SpotifyMetadata
             var apiMatches = api.SearchArtist(query);
             var excludedIDs = new HashSet<string>(result.DownloadedMatches.Select(r => r.SpotifyId));
             result.NotDownloadedMatches = (from m in apiMatches
-                                          where !excludedIDs.Contains(m.id)
-                                          select new Artist { SpotifyId = m.id, Name = m.name, ImageUrl = m.MainImageUrl })
+                                           where !excludedIDs.Contains(m.id)
+                                           select new Artist { SpotifyId = m.id, Name = m.name, ImageUrl = m.MainImageUrl })
                                           .ToList();
 
             return result;
@@ -40,7 +40,12 @@ namespace SpotifyMetadata
 
         public Artist UpdateArtistInfo(int? id)
         {
-            throw new NotImplementedException();
+            var artist = GetArtistById(id);
+            if (artist != null)
+            {
+                artist = DownloadArtistInfo(artist.SpotifyId);
+            }
+            return artist;
         }
 
         public List<Artist> GetAllDownloadedArtists()
@@ -51,26 +56,64 @@ namespace SpotifyMetadata
 
         public Artist DownloadArtistInfo(string spotifyId)
         {
-            var artistData = api.DownloadArtistData(spotifyId);
-            var albumsData = api.DownloadArtistAlbums(spotifyId);
-
+            var artistData = api.DownloadArtistFullData(spotifyId);
             var artistToSave = new Artist()
             {
                 ImageUrl = artistData.MainImageUrl,
                 Name = artistData.name,
                 SpotifyId = artistData.id
             };
-            SaveArtist(artistToSave);
+            artistToSave = SaveArtist(artistToSave);
 
-            return null;
+            var albumsList = api.DownloadArtistAlbums(spotifyId);
+            foreach (var albumItem in albumsList)
+            {
+                var albumData = api.DownloadAlbumFullData(albumItem.id);
+                var albumToSave = new Album()
+                {
+                    ArtistId = artistToSave.Id,
+                    ImageUrl = albumData.MainImageUrl,
+                    Name = albumData.name,
+                    Popularity = albumData.popularity,
+                    SpotifyId = albumData.id,
+                    Year = albumData.Year
+                };
+                albumToSave = SaveAlbum(albumToSave);
+            }
+            
+            return artistToSave;
         }
 
-        private void SaveArtist(Artist artistToSave)
+        private Album SaveAlbum(Album albumToSave)
         {
-            var artist = db.Artists.FirstOrDefault(a => a.Id == artistToSave.Id);
+            var album = db.Albums.FirstOrDefault(a => a.Id == albumToSave.Id ||
+            a.SpotifyId == albumToSave.SpotifyId);
+            if (album == null)
+            {
+                db.Albums.Add(albumToSave);
+                album = albumToSave;
+            }
+            else
+            {
+                album.ImageUrl = albumToSave.ImageUrl;
+                album.Name = albumToSave.Name;
+                album.SpotifyId = albumToSave.SpotifyId;
+                album.Popularity = albumToSave.Popularity;
+                album.Year = albumToSave.Year;
+                album.ArtistId = albumToSave.ArtistId;
+            }
+            db.SaveChanges();
+            return album;
+        }
+
+        private Artist SaveArtist(Artist artistToSave)
+        {
+            var artist = db.Artists.FirstOrDefault(a => a.Id == artistToSave.Id ||
+            a.SpotifyId == artistToSave.SpotifyId);
             if (artist == null)
             {
                 db.Artists.Add(artistToSave);
+                artist = artistToSave;
             }
             else
             {
@@ -79,6 +122,7 @@ namespace SpotifyMetadata
                 artist.SpotifyId = artistToSave.SpotifyId;
             }
             db.SaveChanges();
+            return artist;
         }
 
         public Artist GetArtistById(int? id)
