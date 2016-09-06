@@ -18,28 +18,23 @@ namespace DomainModel
         [ForeignKey("AlbumId")]
         public virtual Album Album { get; set; }
 
+        public int DiscNumber { get; set; }
         public int TrackNumber { get; set; }
         public string Name { get; set; }
         public double Popularity { get; set; }
         public int DurationMS { get; set; }
 
         [NotMapped]
-        public int DurationMinutes
+        public string DurationStringMMSS
         {
             get
             {
-                return (int)TimeSpan.FromMilliseconds(DurationMS).TotalMinutes;
+                int minutes = (int)TimeSpan.FromMilliseconds(DurationMS).TotalMinutes;
+                int totalSeconds = (int)TimeSpan.FromMilliseconds(DurationMS).TotalSeconds;
+                int seconds = totalSeconds - minutes * 60;
+
+                return String.Format("{0}:{1}", minutes, seconds);
             }
         }
-
-        [NotMapped]
-        public int DurationSeconds
-        {
-            get
-            {
-                return (int)TimeSpan.FromMilliseconds(DurationMS).TotalSeconds;
-            }
-        }
-
     }
 }

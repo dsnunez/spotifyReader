@@ -50,7 +50,6 @@ namespace SpotifyMetadata
 
         public List<Artist> GetAllDownloadedArtists()
         {
-            SearchArtist("\"arrows and\" sound");
             return db.Artists.ToList();
         }
 
@@ -79,9 +78,49 @@ namespace SpotifyMetadata
                     Year = albumData.Year
                 };
                 albumToSave = SaveAlbum(albumToSave);
+
+                var albumTracksList = api.DownloadAlbumTracks(albumToSave.SpotifyId);
+                foreach (var trackItem in albumTracksList)
+                {
+                    var trackData = api.DownloadTrackFullData(trackItem.id);
+                    var trackToSave = new Track()
+                    {
+                        AlbumId = albumToSave.Id,
+                        DurationMS = trackData.duration_ms,
+                        Name = trackData.name,
+                        SpotifyId = trackData.id,
+                        Popularity = trackData.popularity,
+                        TrackNumber = trackData.track_number,
+                        DiscNumber = trackData.disc_number
+                    };
+                    trackToSave = SaveTrack(trackToSave);
+                }
             }
             
             return artistToSave;
+        }
+
+        private Track SaveTrack(Track trackToSave)
+        {
+            var track = db.Tracks.FirstOrDefault(a => a.Id == trackToSave.Id ||
+            a.SpotifyId == trackToSave.SpotifyId);
+            if (track == null)
+            {
+                db.Tracks.Add(trackToSave);
+                track = trackToSave;
+            }
+            else
+            {
+                track.Name = trackToSave.Name;
+                track.SpotifyId = trackToSave.SpotifyId;
+                track.Popularity = trackToSave.Popularity;
+                track.AlbumId = trackToSave.AlbumId;
+                track.DiscNumber = trackToSave.DiscNumber;
+                track.DurationMS = trackToSave.DurationMS;
+                track.TrackNumber = trackToSave.TrackNumber;
+            }
+            db.SaveChanges();
+            return track;
         }
 
         private Album SaveAlbum(Album albumToSave)

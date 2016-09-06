@@ -88,5 +88,30 @@ namespace SpotifyMetadata
             var album = GetObjectFromJson<ResponseModels.Full.Album>(response);
             return album;
         }
+
+        internal List<ResponseModels.Simplified.Track> DownloadAlbumTracks(string spotifyAlbumId)
+        {
+            var req = String.Format("albums/{0}/tracks", spotifyAlbumId);
+            var response = ApiGetRequest(req);
+            var page = GetObjectFromJson<ResponseModels.Common.Page<ResponseModels.Simplified.Track>>(response);
+            List<ResponseModels.Simplified.Track> tracks = new List<ResponseModels.Simplified.Track>();
+            tracks.AddRange(page.items);
+            while (page != null && !String.IsNullOrEmpty(page.next))
+            {
+                response = ApiGetRequest(page.next, useBaseUrl: false);
+                page = GetObjectFromJson<ResponseModels.Common.Page<ResponseModels.Simplified.Track>>(response);
+                tracks.AddRange(page.items);
+            }
+
+            return tracks;
+        }
+
+        internal ResponseModels.Full.Track DownloadTrackFullData(string id)
+        {
+            var req = String.Format("tracks/{0}", id);
+            var response = ApiGetRequest(req);
+            var track = GetObjectFromJson<ResponseModels.Full.Track>(response);
+            return track;
+        }
     }
 }

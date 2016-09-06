@@ -11,7 +11,7 @@ namespace SpotifyMetadata.ResponseModels.Full
     public class Album
     {
         public string album_type { get; set; }
-        public List<Artist> artists { get; set; }
+        public List<Simplified.Artist> artists { get; set; }
         public List<object> available_markets { get; set; }
         public List<Copyright> copyrights { get; set; }
         public ExternalIds external_ids { get; set; }
@@ -38,7 +38,7 @@ namespace SpotifyMetadata.ResponseModels.Full
         public int popularity { get; set; }
         public string release_date { get; set; }
         public string release_date_precision { get; set; }
-        public Page<Track> tracks { get; set; }
+        public Page<Simplified.Track> tracks { get; set; }
         public string type { get; set; }
         public string uri { get; set; }
         public int Year
