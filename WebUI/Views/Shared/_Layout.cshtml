@@ -10,50 +10,51 @@
 
 </head>
 <body>
-    <div class="menu-bg">
-        <div class="wrap">
-            <div class="menu">
-                <ul class="nav">
-                    <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Artistas descargados","Index","Artists")</li>
-                </ul>
-            </div>
-            
-            <div class="clear"></div>
-        </div>
-    </div>
-    <div class="header-bg">
-        <div class="wrap">
-            <div class="header">
-                <div class="logo">
-                    <a href="index.html"><img src="~/images/logo.png" alt="" title="logo"></a>
+    <div class="content-wrapper">
+        <div class="menu-bg">
+            <div class="wrap">
+                <div class="menu">
+                    <ul class="nav">
+                        <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Artistas descargados", "Index", "Artists")</li>
+                    </ul>
                 </div>
-                
-                <div class="foot-search">
-                    @using (Html.BeginForm("Search", "Artists"))
+
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="header-bg">
+            <div class="wrap">
+                <div class="header">
+                    <div class="logo">
+                        <a href="index.html"><img src="~/images/logo.png" alt="" title="logo"></a>
+                    </div>
+
+                    <div class="foot-search">
+                        @using (Html.BeginForm("Search", "Artists"))
                     {
-                        <input type="text" name="q" value="buscar artista" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'buscar artista';}">
-                        <input type="submit" value="Buscar">
+                    <input type="text" name="q" value="buscar artista" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'buscar artista';}">
+                    <input type="submit" value="Buscar">
                     }
+                    </div>
+                    <div class="clear"></div>
                 </div>
-                <div class="clear"></div>
+            </div>
+        </div>
+
+        <div class="content-bg">
+            <div class="wrap">
+                <div class="main">
+                    @RenderBody()
+                    <div class="clear"></div>
+                </div>
             </div>
         </div>
     </div>
-    
-    <div class="content-bg">
-        <div class="wrap">
-            <div class="main">
-                @RenderBody()
-                <div class="clear"></div>
-            </div>
-        </div>
-    </div>
-    
     <div class="footer1-bg">
         <div class="wrap">
             <div class="copy">
-                <p>© 2013 All rights Reserved | Design by &nbsp;<a href="http://w3layouts.com">W3Layouts</a></p>
+                <p>© 2016 <a href="http://www.linkedin.com/in/dsnunez">Daniela Núñez</a> | Diseño "Music Box" por&nbsp;<a href="http://w3layouts.com">W3Layouts</a></p>
             </div>
         </div>
     </div>

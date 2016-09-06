@@ -58,6 +58,10 @@
     <Compile Include="Migrations\201609052128156_artistAddColumnSpotifyId.Designer.cs">
       <DependentUpon>201609052128156_artistAddColumnSpotifyId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609060321290_artistAddColumnImageUrl.cs" />
+    <Compile Include="Migrations\201609060321290_artistAddColumnImageUrl.Designer.cs">
+      <DependentUpon>201609060321290_artistAddColumnImageUrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpotifyContext.cs" />
@@ -72,6 +76,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609052128156_artistAddColumnSpotifyId.resx">
       <DependentUpon>201609052128156_artistAddColumnSpotifyId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609060321290_artistAddColumnImageUrl.resx">
+      <DependentUpon>201609060321290_artistAddColumnImageUrl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

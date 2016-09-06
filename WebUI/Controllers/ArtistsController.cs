@@ -23,10 +23,14 @@ namespace spotifyAcid.Controllers
 
         public ActionResult Search(string q)
         {
-            return View("Index", repo.SearchArtist(q).NotDownloadedMatches);
+            if (String.IsNullOrWhiteSpace(q))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return View(repo.SearchArtist(q));
         }
 
-        // GET: Artists/Details/5
+        // GET: Artists/View/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -39,6 +43,30 @@ namespace spotifyAcid.Controllers
                 return HttpNotFound();
             }
             return View(artist);
+        }
+
+        public ActionResult Update(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Artist artist = repo.UpdateArtistInfo(id);
+            if (artist == null)
+            {
+                return HttpNotFound();
+            }
+            return View("Details", artist);
+        }
+
+        public ActionResult Download(string spotifyId)
+        {
+            if (String.IsNullOrWhiteSpace(spotifyId))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Artist artist = repo.DownloadArtistInfo(spotifyId);
+            return View("Details", artist);
         }
     }
 }

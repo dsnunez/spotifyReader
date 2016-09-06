@@ -336,17 +336,21 @@ body {
     padding: 4% 0 0;
     min-height: 100%;
     position: relative;
+    padding-bottom:75px; 
+    overflow: auto;
 }
 
 .main {
     background: #ffffff;
     box-shadow: 0px 0px 6px #999;
+
 }
 
 .content {
-    width: 74.33%;
+    width: 100%;
     float: left;
     margin-right: 3.33%;
+    min-height:100%;
 }
 
 .sidebar {
@@ -835,9 +839,12 @@ body {
 /*footer1*/
 .footer1-bg {
     background: rgb(43, 43, 43);
-    position: absolute;
     bottom: 0;
     width: 100%;
+    margin-top:-75px;
+    clear: both;
+    height:75px;
+    position:relative;
 }
 
 .copy {

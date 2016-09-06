@@ -41,6 +41,19 @@ namespace SpotifyMetadata.ResponseModels
         public string href { get; set; }
         public string id { get; set; }
         public List<Image> images { get; set; }
+        public string MainImageUrl
+        {
+            get
+            {
+                if (images == null || images.Count() == 0)
+                {
+                    return "";
+                }
+                else {
+                    return images.First().url;
+                }
+            }
+        }
         public string name { get; set; }
         public int popularity { get; set; }
         public string type { get; set; }

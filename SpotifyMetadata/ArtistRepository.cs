@@ -32,16 +32,26 @@ namespace SpotifyMetadata
             var excludedIDs = new HashSet<string>(result.DownloadedMatches.Select(r => r.SpotifyId));
             result.NotDownloadedMatches = (from m in apiMatches
                                           where !excludedIDs.Contains(m.id)
-                                          select new Artist { SpotifyId = m.id, Name = m.name })
+                                          select new Artist { SpotifyId = m.id, Name = m.name, ImageUrl = m.MainImageUrl })
                                           .ToList();
 
             return result;
+        }
+
+        public Artist UpdateArtistInfo(int? id)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Artist> GetAllDownloadedArtists()
         {
             SearchArtist("\"arrows and\" sound");
             return db.Artists.ToList();
+        }
+
+        public Artist DownloadArtistInfo(string spotifyId)
+        {
+            throw new NotImplementedException();
         }
 
         public Artist GetArtistById(int? id)
