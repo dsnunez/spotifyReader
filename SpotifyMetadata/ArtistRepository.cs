@@ -53,12 +53,37 @@ namespace SpotifyMetadata
         {
             var artistData = api.DownloadArtistData(spotifyId);
             var albumsData = api.DownloadArtistAlbums(spotifyId);
+
+            var artistToSave = new Artist()
+            {
+                ImageUrl = artistData.MainImageUrl,
+                Name = artistData.name,
+                SpotifyId = artistData.id
+            };
+            SaveArtist(artistToSave);
+
             return null;
+        }
+
+        private void SaveArtist(Artist artistToSave)
+        {
+            var artist = db.Artists.FirstOrDefault(a => a.Id == artistToSave.Id);
+            if (artist == null)
+            {
+                db.Artists.Add(artistToSave);
+            }
+            else
+            {
+                artist.ImageUrl = artistToSave.ImageUrl;
+                artist.Name = artistToSave.Name;
+                artist.SpotifyId = artistToSave.SpotifyId;
+            }
+            db.SaveChanges();
         }
 
         public Artist GetArtistById(int? id)
         {
-            throw new NotImplementedException();
+            return id == null ? null : db.Artists.FirstOrDefault(a => a.Id == (int)id);
         }
     }
 }

@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Album.cs" />
     <Compile Include="Artist.cs" />
     <Compile Include="Migrations\201608311629378_InitialCreate.cs" />
     <Compile Include="Migrations\201608311629378_InitialCreate.Designer.cs">
@@ -62,9 +63,14 @@
     <Compile Include="Migrations\201609060321290_artistAddColumnImageUrl.Designer.cs">
       <DependentUpon>201609060321290_artistAddColumnImageUrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609061522531_addTablesAlbumAndTrack.cs" />
+    <Compile Include="Migrations\201609061522531_addTablesAlbumAndTrack.Designer.cs">
+      <DependentUpon>201609061522531_addTablesAlbumAndTrack.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpotifyContext.cs" />
+    <Compile Include="Track.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -79,6 +85,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609060321290_artistAddColumnImageUrl.resx">
       <DependentUpon>201609060321290_artistAddColumnImageUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609061522531_addTablesAlbumAndTrack.resx">
+      <DependentUpon>201609061522531_addTablesAlbumAndTrack.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
