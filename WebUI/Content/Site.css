@@ -32,3 +32,6 @@ select,
 textarea {
     max-width: 280px;
 }
+.trackList {
+    display: none;
+}

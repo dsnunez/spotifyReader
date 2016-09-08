@@ -38,11 +38,11 @@
                 <div class="col-md-6 song">
                     <span class="h5">Canción más larga</span><br />
                     <span class="h4">@Model.LongestTrack.Name (@Model.LongestTrack.DurationStringMMSS)</span> <br />
-                    <span class="btn btn-default btn-sm">Ver canciones</span>
+                    <span class="btn btn-default btn-sm view-tracks" data-id="tracks_@Model.Id">Ver canciones</span>
                 </div>
             </div>
         </div>
-        <div>
+        <div id="tracks_@Model.Id" class="trackList">
             @{Html.RenderPartial("_TrackList", Model.Tracks);}
         </div>
     </div>
