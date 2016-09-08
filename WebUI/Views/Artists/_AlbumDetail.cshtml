@@ -5,36 +5,42 @@
         <a href="@Model.ImageUrl"><img src="@Model.ImageUrl" height="150" width="150"></a>
     </div>
     <div class="para">
-        <h4>@Html.DisplayFor(model => model.Name)</h4>
-        <h5>@Html.DisplayFor(model => model.Year)</h5>
+        <h4>@Html.DisplayFor(model => model.Name) <small>@Html.DisplayFor(model => model.Year)</small></h4>
         <div class="cart-b">
-
-            <dl class="dl-horizontal">
-                <dt>
-                    Popularidad del álbum
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Popularity)
-                </dd>
-
-                <dt>
-                    Popularidad promedio de las canciones
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.AvgTrackPopularity)
-                </dd>
-
-                <dt>
-                   Canción más larga
-                </dt>
-
-                <dd>
-                    @Model.LongestTrack.Name (@Model.LongestTrack.DurationStringMMSS)
-                </dd>
-
-            </dl>
+            <div class="row">
+                <div class="col-md-3 text-center">
+                    @{
+                        string albumPopClass = "c100 p" + Model.Popularity + " small";
+                    }
+                    <div class="@albumPopClass center">
+                        <span>@Model.Popularity</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <p class="popularity">Popularidad del álbum</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    @{
+                        string avgTrackAlbumPopClass = "c100 p" + (int)Model.AvgTrackPopularity + " small";
+                        string avgTrackAlbumPopScore = String.Format("{0:0.0}", Model.AvgTrackPopularity);
+                    }
+                    <div class="@avgTrackAlbumPopClass center">
+                        <span>@avgTrackAlbumPopScore</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <p class="popularity">Popularidad promedio de las canciones</p>
+                </div>
+                <div class="col-md-6 song">
+                    <span class="h5">Canción más larga</span><br />
+                    <span class="h4">@Model.LongestTrack.Name (@Model.LongestTrack.DurationStringMMSS)</span> <br />
+                    <span class="btn btn-default btn-sm">Ver canciones</span>
+                </div>
+            </div>
         </div>
         <div>
             @{Html.RenderPartial("_TrackList", Model.Tracks);}
@@ -42,6 +48,3 @@
     </div>
     <div class="clear"></div>
 </div>
-
-
-

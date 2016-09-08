@@ -1315,8 +1315,17 @@ body {
 
 .cart-b {
     margin: 3% 0;
-    border-top: 1px solid rgba(85, 85, 85, 0.15);
-    border-bottom: 1px solid rgba(85, 85, 85, 0.15);
+}
+
+.cart-b .popularity{
+        font-size: 0.8425em;
+        padding: 0.2em 0 0.8em;
+        color: #555;
+        line-height: 1.4em;
+}
+.cart-b .song{
+        color: #555;
+        line-height: 1.4em;
 }
 
 .right {

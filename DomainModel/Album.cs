@@ -18,7 +18,7 @@ namespace DomainModel
 
         public int Year { get; set; }
 
-        public double Popularity { get; set; }
+        public int Popularity { get; set; }
 
         [NotMapped]
         public double AvgTrackPopularity

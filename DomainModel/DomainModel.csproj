@@ -75,6 +75,10 @@
     <Compile Include="Migrations\201609061643457_trackAddColumnDiscNumber.Designer.cs">
       <DependentUpon>201609061643457_trackAddColumnDiscNumber.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609081712195_albumPopularityFromDoubleToInt.cs" />
+    <Compile Include="Migrations\201609081712195_albumPopularityFromDoubleToInt.Designer.cs">
+      <DependentUpon>201609081712195_albumPopularityFromDoubleToInt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpotifyContext.cs" />
@@ -102,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609061643457_trackAddColumnDiscNumber.resx">
       <DependentUpon>201609061643457_trackAddColumnDiscNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609081712195_albumPopularityFromDoubleToInt.resx">
+      <DependentUpon>201609081712195_albumPopularityFromDoubleToInt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
