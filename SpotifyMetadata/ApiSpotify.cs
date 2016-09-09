@@ -64,9 +64,9 @@ namespace SpotifyMetadata
             return artist;
         }
 
-        internal List<ResponseModels.Simplified.Album> DownloadArtistAlbums(string spotifyArtistId, string albumType = "ep,album")
+        internal List<ResponseModels.Simplified.Album> DownloadArtistAlbums(string spotifyArtistId, string albumType = "ep,album", string market="CL")
         {
-            var req = String.Format("artists/{0}/albums?album_type={1}", spotifyArtistId, albumType);
+            var req = String.Format("artists/{0}/albums?album_type={1}&market={2}", spotifyArtistId, albumType, market);
             var response = ApiGetRequest(req);
             var page = GetObjectFromJson<ResponseModels.Common.Page<ResponseModels.Simplified.Album>>(response);
             List<ResponseModels.Simplified.Album> albums = new List<ResponseModels.Simplified.Album>();

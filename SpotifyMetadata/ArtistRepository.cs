@@ -12,6 +12,15 @@ namespace SpotifyMetadata
     {
         SpotifyContext db = new SpotifyContext();
         ApiSpotify api = new ApiSpotify();
+
+        public void DeleteAll()
+        {
+            db.Tracks.RemoveRange(db.Tracks);
+            db.Albums.RemoveRange(db.Albums);
+            db.Artists.RemoveRange(db.Artists);
+            db.SaveChanges();
+        }
+
         public ArtistSearchResult SearchArtist(string query)
         {
             ArtistSearchResult result = new ArtistSearchResult();

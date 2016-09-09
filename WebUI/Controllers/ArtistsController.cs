@@ -122,5 +122,11 @@ namespace spotifyAcid.Controllers
                 }
             };
         }
+
+        public ActionResult RestartDatabase()
+        {
+            repo.DeleteAll();
+            return RedirectToAction("Index");
+        }
     }
 }

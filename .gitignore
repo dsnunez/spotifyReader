@@ -280,3 +280,5 @@ __pycache__/
 *.db
 /SpotifyMetadata/keys.config
 /WebUI/keys.config
+/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
