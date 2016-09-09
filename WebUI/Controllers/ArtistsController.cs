@@ -66,8 +66,41 @@ namespace spotifyAcid.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Artist artist = repo.DownloadArtistInfo(id);
+            Artist artist = repo.DownloadArtistFullInfo(id);
             return View("Details", artist);
+        }
+        public ActionResult DownloadArtistInfo(string id)
+        {
+            if (String.IsNullOrWhiteSpace(id))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var artistSavedId = repo.DownloadArtistBasicInfo(id);
+            var albumsAndIds = repo.DownloadArtistAlbumList(id);
+            //Devolver JSON con {nombre, id} de cada album
+
+            return new JsonResult() { Data = new { albums = albumsAndIds, artist = artistSavedId } };
+        }
+        public ActionResult DownloadAlbum(string id, int artist)
+        {
+            if (String.IsNullOrWhiteSpace(id))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var albumSavedId = repo.DownloadAlbumBasicInfo(id, artist);
+            var tracksAndIds = repo.DownloadAlbumTrackList(id);
+            //Devolver JSON con {nombre, id} de cada track
+            return new JsonResult() { Data = new { tracks = tracksAndIds, album = albumSavedId } };
+        }
+        public ActionResult DownloadTrack(string id, int album)
+        {
+            if (String.IsNullOrWhiteSpace(id))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            repo.DownloadTrack(id, album);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }
 }
