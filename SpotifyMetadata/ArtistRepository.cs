@@ -99,7 +99,7 @@ namespace SpotifyMetadata
 
             return artistToSave;
         }
-        
+
         public int DownloadArtistBasicInfo(string spotifyId)
         {
             var artistData = api.DownloadArtistFullData(spotifyId);
@@ -112,11 +112,16 @@ namespace SpotifyMetadata
             artistToSave = SaveArtist(artistToSave);
             return artistToSave.Id;
         }
-        public IEnumerable<KeyValuePair<string, string>> DownloadArtistAlbumList(string spotifyId)
-        { 
+        public IEnumerable<dynamic> DownloadArtistAlbumList(string spotifyId)
+        {
             var albumsList = api.DownloadArtistAlbums(spotifyId);
             return from a in albumsList
-                   select new KeyValuePair<string, string>(a.id, a.name);
+                   select new
+                   {
+                       Key = a.id,
+                       Value = a.name,
+                       Img = a.images != null && a.images.Count > 0 && a.images[0] != null ? a.images[0].url : ""
+                   };
         }
 
         public int DownloadAlbumBasicInfo(string spotifyId, int artistId)
@@ -135,7 +140,7 @@ namespace SpotifyMetadata
             return albumToSave.Id;
         }
         public IEnumerable<KeyValuePair<string, string>> DownloadAlbumTrackList(string spotifyId)
-        { 
+        {
             var albumTracksList = api.DownloadAlbumTracks(spotifyId);
             return from t in albumTracksList
                    select new KeyValuePair<string, string>(t.id, t.name);
