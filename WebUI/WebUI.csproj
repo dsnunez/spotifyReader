@@ -276,6 +276,7 @@
     <Content Include="Views\Artists\_TrackList.cshtml" />
     <Content Include="Views\Artists\_ArtistsDownloaded.cshtml" />
     <Content Include="Views\Artists\_ArtistsSpotify.cshtml" />
+    <Content Include="Views\Artists\_DownloadingArtist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,6 +12,8 @@
 @{
     ViewBag.Title = "Resultados de la búsqueda";
 
+    Html.RenderPartial("_DownloadingArtist");
+
     Html.RenderPartial("_ArtistsDownloaded", Model.DownloadedMatches,
         new ViewDataDictionary { { "search", true } });
 

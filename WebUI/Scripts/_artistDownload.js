@@ -1,16 +1,21 @@
 ﻿$(document).ready(function () {
     $(".download-spotify").click(function () {
         var id = $(this).data("id");
-        downloadArtistInfo(id);
+        var name = $(this).data("name");
+        downloadArtistInfo(id,name);
     });
 
     $(".upload-spotify").click(function () {
         var id = $(this).data("id");
-        downloadArtistInfo(id);
+        var name = $(this).data("name");
+        downloadArtistInfo(id,name);
     });
 });
 
-function downloadArtistInfo(id) {
+function downloadArtistInfo(id,name) {
+    $("#download-artist-name").text(name);
+    show_modal("download-modal");
+
     // descargando información del artista
     // obtener lista de álbumes (nombres + id)
     var artistInfo = excecuteAction("Artists", "DownloadArtistInfo", id);
@@ -33,7 +38,9 @@ function downloadArtistInfo(id) {
             var trackName = track.Value;
             var viewParams = {
                 albumIndex: i,
+                albumName: albumName,
                 trackIndex: j,
+                trackName: trackName,
                 maxAlbum: maxAlbum,
                 maxTrack: maxTrack,
                 artistSavedId: artistSavedId
@@ -43,7 +50,25 @@ function downloadArtistInfo(id) {
     }
 }
 function updateView(viewParams) {
-    if (viewParams.albumIndex + 1 == viewParams.maxAlbum && viewParams.trackIndex + 1 == viewParams.maxTrack) {
+    var currAlbum = viewParams.albumIndex + 1;
+    var albumName = viewParams.albumName;
+    var maxAlbum = viewParams.maxAlbum;
+
+    var currTrack = viewParams.trackIndex + 1;
+    var trackName = viewParams.trackName;
+    var maxTrack = viewParams.maxTrack;
+
+    if (currAlbum == maxAlbum && currTrack == maxTrack) {
+        $("#download-progress-track").width(100 + "%");
         window.location.href = "/Artists/Details/" + viewParams.artistSavedId;
+    }
+    else {
+        $("#downloading-text-album").text("Descargando álbum \"" + albumName + "\" (" + currAlbum + "/" + maxAlbum + ")...");
+        var albumProgress = currAlbum / maxAlbum;
+        $("#download-progress-album").width(albumProgress * 100 + "%");
+
+        $("#downloading-text-track").text("Canción \"" + trackName + "\" (" + currTrack + "/" + maxTrack + ")...");
+        var trackProgress = currTrack / maxTrack;
+        $("#download-progress-track").width(trackProgress * 100 + "%");
     }
 }
