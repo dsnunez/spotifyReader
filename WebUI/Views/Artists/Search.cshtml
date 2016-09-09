@@ -2,66 +2,10 @@
 
 @{
     ViewBag.Title = "Resultados de la búsqueda";
+
+    Html.RenderPartial("_ArtistsDownloaded", Model.DownloadedMatches,
+        new ViewDataDictionary { { "search", true } });
+
+    Html.RenderPartial("_ArtistsSpotify", Model.NotDownloadedMatches,
+        new ViewDataDictionary { { "downloadedN", Model.DownloadedMatches.Count() } });
 }
-    <h2>Artistas descargados</h2>
-
-    @if (Model.DownloadedMatches.Count() == 0)
-    {
-        <p>Todavía no descargas la información de ningún artista</p>
-        <p>Empieza por buscar uno</p>
-    }
-    else
-    {
-        <table class="table">
-            @foreach (var item in Model.DownloadedMatches)
-            {
-                <tr>
-                    <td><img alt="@item.Name" src="@item.ImageUrl" height="50" width="50" /></td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Ver", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Actualizar", "Update", new { id = item.Id }) 
-                    </td>
-                </tr>
-            }
-
-        </table>
-    }
-    <h2>Artistas online</h2>
-
-    @if (Model.NotDownloadedMatches.Count() == 0)
-    {
-        if (Model.DownloadedMatches.Count() == 0)
-        {
-        <p>No encontramos nada en Spotify tampoco :(</p>
-        <p>Inténtalo de nuevo</p>
-        }
-        else
-        { 
-            <p>No encontramos nada en Spotify que ya no tengas descargado</p>
-            <p>Recuerda que puedes actualizar la información de los artistas que ya descargaste</p>
-        }
-    }
-    else
-    {
-        <table class="table">
-          @foreach (var item in Model.NotDownloadedMatches)
-            {
-                <tr>
-                    <td><img alt="@item.Name" src="@item.ImageUrl" height="50" width="50" /></td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Descargar", "Download", new { id = item.SpotifyId })
-                    </td>
-                </tr>
-            }
-
-        </table>
-    }

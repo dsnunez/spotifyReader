@@ -1,16 +1,18 @@
 ﻿body {
     padding-top: 50px;
-    padding:10px;
-   padding-bottom:60px;   /* Height of the footer */
+    padding: 10px;
+    padding-bottom: 60px; /* Height of the footer */
 }
+
 html,
 body {
-   margin:0;
-   padding:0;
-   height:100%;
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
+
 .content-wrapper {
-    min-height:100%;
+    min-height: 100%;
     background: #e0e0e0;
 }
 /* Set padding to keep content from hitting the edges */
@@ -32,6 +34,21 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
 .trackList {
     display: none;
+}
+
+td > .progress {
+    margin-bottom: 0px;
+}
+
+.trackList td,
+.trackList .progress-bar {
+    font-size: 0.8em;
+}
+
+.trackList .progress {
+    height: 15px;
 }
