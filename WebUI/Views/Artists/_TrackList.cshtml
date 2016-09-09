@@ -1,36 +1,42 @@
 ﻿@model IEnumerable<DomainModel.Track>
-
 <table class="table table-condensed">
-    <tr>
-        <th>
-            #
-        </th>
-        <th>
-            Canción
-        </th>
-        <th>
-            Popularidad
-        </th>
-        <th>
-            Duración
-        </th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @String.Format("{0:00}",item.TrackNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Popularity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DurationStringMMSS)
-        </td>
-    </tr>
-}
-
+    <thead>
+        <tr>
+            <th style="width:30px">
+                #
+            </thstyle="width:80px">
+            <th>
+                Canción
+            </th>
+            <th style="width:150px">
+                Popularidad
+            </th>
+            <th class="text-center" style="width:80px">
+                @Html.GlyphIcon("time")
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @String.Format("{0:00}", item.TrackNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="@item.Popularity" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: @item.Popularity%;">
+                            @item.Popularity
+                        </div>
+                    </div>
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.DurationStringMMSS)
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

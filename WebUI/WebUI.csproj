@@ -170,6 +170,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\ArtistsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="ExtendedHelpers\BootstrapHelpers.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -269,6 +270,8 @@
     <Content Include="Views\Artists\Search.cshtml" />
     <Content Include="Views\Artists\_AlbumDetail.cshtml" />
     <Content Include="Views\Artists\_TrackList.cshtml" />
+    <Content Include="Views\Artists\_ArtistsDownloaded.cshtml" />
+    <Content Include="Views\Artists\_ArtistsSpotify.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

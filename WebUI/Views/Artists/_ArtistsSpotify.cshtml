@@ -1,0 +1,39 @@
+﻿@model IEnumerable<DomainModel.Artist>
+<h2>Artistas online</h2>
+<div class="single">
+    @if (Model.Count() == 0)
+    {
+        <div class="jumbotron">
+            @if (ViewData["downloadedN"] != null && (int)ViewData["downloadedN"] == 0)
+            {
+                <p>No encontramos nada en Spotify tampoco :(</p>
+                <p>Inténtalo de nuevo</p>
+            }
+            else
+            {
+                <p>No encontramos nada en Spotify que ya no tengas descargado</p>
+                <p>Recuerda que puedes actualizar la información de los artistas que ya descargaste</p>
+            }
+        </div>
+    }
+    else
+    {
+        <table class="table">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="width:45px"><img alt="@item.Name" src="@item.ImageUrl" height="40" width="40" /></td>
+                    <td>
+                        <span class="h3">@Html.DisplayFor(modelItem => item.Name)</span>
+</td>
+                    <td style="width:100px">
+                        <span class="btn btn-success">
+                            @Html.ActionLink("Descargar", "Download", new { id = item.SpotifyId })
+                        </span>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+</div>

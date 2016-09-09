@@ -336,21 +336,20 @@ body {
     padding: 4% 0 0;
     min-height: 100%;
     position: relative;
-    padding-bottom:75px; 
+    padding-bottom: 75px;
     overflow: auto;
 }
 
 .main {
     background: #ffffff;
     box-shadow: 0px 0px 6px #999;
-
 }
 
 .content {
     width: 100%;
     float: left;
     margin-right: 3.33%;
-    min-height:100%;
+    min-height: 100%;
 }
 
 .sidebar {
@@ -491,29 +490,29 @@ body {
         font-size: 0.8em;
     }
 
-.btn {
-    margin: 12% 0 6%;
+.btn a {
+    color: #fff;
 }
 
-    .btn a, .btn1 a, .span_2_of_3 .button a, .s-para .button a, .images_1_of_2 .button a, .contact-form input[type="submit"], .det-para .button a {
-        font-size: 0.84em;
-        background: url('../images/btn.png') repeat-x 0 0 #10696E;
-        border: none;
-        padding: 8px;
-        color: #fff;
-        cursor: pointer;
-        text-transform: capitalize;
-    }
+.btn1 a, .span_2_of_3 .button a, .s-para .button a, .images_1_of_2 .button a, .contact-form input[type="submit"], .det-para .button a {
+    font-size: 0.84em;
+    background: url('../images/btn.png') repeat-x 0 0 #10696E;
+    border: none;
+    padding: 8px;
+    color: #fff;
+    cursor: pointer;
+    text-transform: capitalize;
+}
 
-        .btn a:hover, .btn1 a:hover, .span_2_of_3 .button a:hover, .s-para .button a:hover, .images_1_of_2 .button a:hover, .contact-form input[type="submit"]:hover, .det-para .button a:hover {
-            background-position: 0 -32px;
-            text-decoration: none !important;
-            -webkit-transition: background .2s ease;
-            -moz-transition: background .2s ease;
-            -ms-transition: background .2s ease;
-            -o-transition: background .2s ease;
-            transition: background .2s ease;
-        }
+    .btn a:hover, .btn1 a:hover, .span_2_of_3 .button a:hover, .s-para .button a:hover, .images_1_of_2 .button a:hover, .contact-form input[type="submit"]:hover, .det-para .button a:hover {
+        background-position: 0 -32px;
+        text-decoration: none !important;
+        -webkit-transition: background .2s ease;
+        -moz-transition: background .2s ease;
+        -ms-transition: background .2s ease;
+        -o-transition: background .2s ease;
+        transition: background .2s ease;
+    }
 /*sidebar*/
 .sidebar h2 {
     margin: 3% 0;
@@ -841,10 +840,10 @@ body {
     background: rgb(43, 43, 43);
     bottom: 0;
     width: 100%;
-    margin-top:-75px;
+    margin-top: -75px;
     clear: both;
-    height:75px;
-    position:relative;
+    height: 75px;
+    position: relative;
 }
 
 .copy {
@@ -1294,8 +1293,7 @@ body {
 /*details*/
 .single {
     padding: 1.5% 1.5% 0;
-    background-color:#f0f0f0;
-    margin:10px;
+    margin: 25px;
 }
 
 .grid-img1 {
@@ -1308,7 +1306,7 @@ body {
 .para {
     float: left;
     width: 71.33%;
-    padding-top:10px;
+    padding-top: 10px;
 }
 
     .para h4 {
@@ -1320,16 +1318,17 @@ body {
     margin: 3% 0;
 }
 
-.cart-b .popularity{
+    .cart-b .popularity {
         font-size: 0.8425em;
         padding: 0.2em 0 0.8em;
         color: #555;
         line-height: 1.4em;
-}
-.cart-b .song{
+    }
+
+    .cart-b .song {
         color: #555;
         line-height: 1.4em;
-}
+    }
 
 .right {
     float: right;
