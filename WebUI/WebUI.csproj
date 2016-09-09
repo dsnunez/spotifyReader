@@ -183,6 +183,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\circle.css" />
+    <Content Include="Content\modal-view.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -231,6 +232,7 @@
     <Content Include="images\pic9.jpg" />
     <Content Include="images\shadow.png" />
     <Content Include="images\twitter.png" />
+    <Content Include="Scripts\ajax-wrap.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="keys.config" />
@@ -246,6 +248,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modal-view.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr.custom.53451.js" />
     <Content Include="Scripts\respond.js" />
