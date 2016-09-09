@@ -1,5 +1,14 @@
 ﻿@model SpotifyMetadata.ArtistSearchResult
-
+@section styles
+    {
+    <link rel="stylesheet" type="text/css" href="~/Content/modal-view.css" />
+}
+@section scripts
+        {
+    @Scripts.Render("~/Scripts/modal-view.js")
+    @Scripts.Render("~/Scripts/ajax-wrap.js")
+    @Scripts.Render("~/Scripts/_artistDownload.js")
+}
 @{
     ViewBag.Title = "Resultados de la búsqueda";
 

@@ -1,10 +1,11 @@
 ﻿function excecuteAction(control, action) {
     var ajaxResponse = '';
-    if (entityId > 0) {
+    if (entityId != 0) {
         $.ajax({
-            url: '/WebApp/' + control + '/' + action + '/?id=' + entityId,
+            url: '/' + control + '/' + action,
             async: false,
-            type: 'get',
+            type: 'post',
+            data: { id: entityId },
             success: function (data) {
                 ajaxResponse = data;
             }, dataType: 'json'
@@ -15,11 +16,13 @@
 
 function excecuteAction(control, action, id) {
     var ajaxResponse = '';
-    if (id > 0) {
+    var url = '/' + control + '/' + action;
+    if (id != 0) {
         $.ajax({
-            url: '/WebApp/' + control + '/' + action + '/?id=' + id,
+            url: url,
             async: false,
-            type: 'get',
+            type: 'post',
+            data: {id:id},
             success: function (data) {
                 ajaxResponse = data;
             },
@@ -29,16 +32,21 @@ function excecuteAction(control, action, id) {
     return ajaxResponse;
 }
 
-function excecuteAction(control, action, arrayAsString) {
+function excecuteActionMultipleParams(control, action, params) {
+    excecuteActionMultipleParams(control, action, params, null, null)
+}
+function excecuteActionMultipleParams(control, action, params, callback, callbackParams) {
     var ajaxResponse = '';
     $.ajax({
-        url: '/WebApp/' + control + '/' + action,
+        url: '/' + control + '/' + action,
         async: false,
         type: 'post',
         traditional: true,
-        data: { idArrayAsString: arrayAsString },
+        data: params,
         success: function (data) {
             ajaxResponse = data;
+            if (typeof callback === "function")
+                callback(callbackParams);
         },
         dataType: 'json'
     });

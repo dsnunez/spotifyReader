@@ -25,15 +25,14 @@
                     <td style="width:45px"><img alt="@item.Name" src="@item.ImageUrl" height="40" width="40" /></td>
                     <td>
                         <span class="h3">@Html.DisplayFor(modelItem => item.Name)</span>
-</td>
+                    </td>
                     <td style="width:100px">
-                        <span class="btn btn-success">
-                            @Html.ActionLink("Descargar", "Download", new { id = item.SpotifyId })
+                        <span class="btn btn-success download-spotify" data-id="@item.SpotifyId">
+                            Descargar
                         </span>
                     </td>
                 </tr>
             }
-
         </table>
     }
 </div>

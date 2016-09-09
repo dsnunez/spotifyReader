@@ -2,21 +2,20 @@
 @section styles
     {
     <link rel="stylesheet" type="text/css" href="~/Content/circle.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/modal-view.css" />
 }
 @section scripts
 {
     @Scripts.Render("~/Scripts/_albumDetail.js")
+    @Scripts.Render("~/Scripts/modal-view.js")
+    @Scripts.Render("~/Scripts/ajax-wrap.js")
+    @Scripts.Render("~/Scripts/_artistDownload.js")
 }
 @{
     ViewBag.Title = "Details";
 }
 
 <h2>@Html.DisplayFor(model => model.Name)</h2>
-
-<p>
-    @Html.ActionLink("Actualizar", "Update", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
 <div class="section group">
     <div class="cont">
         @foreach (var album in Model.Albums)
