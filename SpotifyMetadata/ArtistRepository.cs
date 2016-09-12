@@ -34,8 +34,13 @@ namespace SpotifyMetadata
             foreach (var q in queryParts)
             {
                 var part = q.Trim('"');
+                var wordFollowed = part + " ";
+                var wordLast = " " + part;
                 result.DownloadedMatches.AddRange(db.Artists
-                    .Where(a => a.Name.ToLower().Contains(part)).ToList<Artist>()); ;
+                    .Where(a => a.NameToLower.Contains(wordFollowed) 
+                                || a.NameToLower.Contains(wordLast)
+                                || a.NameToLower.Equals(part))
+                    .ToList<Artist>()); ;
             }
             var apiMatches = api.SearchArtist(query);
             var excludedIDs = new HashSet<string>(result.DownloadedMatches.Select(r => r.SpotifyId));
@@ -69,6 +74,7 @@ namespace SpotifyMetadata
             {
                 ImageUrl = artistData.MainImageUrl,
                 Name = artistData.name,
+                NameToLower = artistData.name.ToLower(),
                 SpotifyId = artistData.id
             };
             artistToSave = SaveArtist(artistToSave);
@@ -227,6 +233,7 @@ namespace SpotifyMetadata
             {
                 artist.ImageUrl = artistToSave.ImageUrl;
                 artist.Name = artistToSave.Name;
+                artist.NameToLower = artistToSave.Name.ToLower();
                 artist.SpotifyId = artistToSave.SpotifyId;
             }
             db.SaveChanges();
