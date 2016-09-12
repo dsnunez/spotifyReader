@@ -42,4 +42,7 @@ La información de Spotify es accedida a través de la [Spotify Web API](https:/
 [pendiente]
 
 ### Otras herramientas y librerías utilizadas
-[pendiente]
+* **[Kanbanery](https://dsnunez.kanbanery.com/projects/70697/board/?key=f171791a46c71075d7ef0f4f3c1a73580f9d998e)**: Para llevar cuenta de las tareas pendientes y realizadas. Cada *commit* fue asociado a alguna tarea del kanban mediante un identificador del tipo "#000000" y el *service hook* disponible entre GitHub y Kanbanery.
+* **[MusicBox Theme](https://w3layouts.com/music-box-online-music-mobile-website-template)**: Template para Bootstrap adaptada para esta aplicación.
+* **[CSS Percentege](http://circle.firchow.net/) Circle**: Hoja de estilos que facilitó la visualización de la popularidad de cada álbum.
+* **[json2csharp](http://json2csharp.com/)**: Para agilizar el mapeo de los objetos JSON que entrega la API de Spotify a clases de C#, lo que a su vez agiliza su deserialización.
