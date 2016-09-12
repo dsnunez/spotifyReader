@@ -61,6 +61,8 @@ Hace uso del proyecto DomainModel.
 La información de Spotify es accedida a través de la [Spotify Web API](https://developer.spotify.com/web-api/)
 >Nota: La *API de Metadata de Spotify* [alcanzó su "end of life" el 20 de Enero del 2016](https://developer.spotify.com/technologies/metadata-api/) , por lo que forzosamente se debió utilizar la [Web API](https://developer.spotify.com/web-api/)
 
+Para recibir e interpretar los JSON que entrega esta API, se utilizó el paquete NuGet **[Newtonsoft.Json](https://www.nuget.org/packages/newtonsoft.json/)** y, en la carpeta ResponseModels, se guardaron clases equivalentes a los objetos Artist, Album y Track (en sus dos versiones, *full* y *simplified*) del [Object Model](https://developer.spotify.com/web-api/object-model/) que utiliza la API de Spotify. También se guardaron representaciones de otros objetos que son referenciados por los ya mencionados.
+
 Los *endpoints* de la API (dirección base: https://api.spotify.com) que se utilizan en esta aplicación son:
 
 Endpoint | Uso en esta aplicación | Comentarios | Documentación
@@ -68,16 +70,22 @@ Endpoint | Uso en esta aplicación | Comentarios | Documentación
 GET /v1/search | /search/?q={query}&type=artist | Se utiliza la query provista por el usuario para buscar artistas cuyo nombre coincida con la búsqueda.  | [Search for an item](https://developer.spotify.com/web-api/search-item/)
 GET /v1/artists/{id} | /artists/{id} | Una vez que se elige el artista a descargar, se recupera su información a través de su ID de Spotify. | [Get an Artist](https://developer.spotify.com/web-api/get-artist/)
 GET /v1/artists/{id}/albums | /artists/{id}/albums?album_type=ep,album&market=CL | Dada una ID de artista, se descarga su lista de álbumes del tipo EP y ALBUM (`type=ep,album`) y que estén disponibles en el mercado chileno (`market=CL`). | [Get an Artist’s Albums](https://developer.spotify.com/web-api/get-artists-albums/)
-GET /v1/albums/{id} | /albums/{id} | Dada la ID de un album (obtenida a través de la lista de álbumes de un artista), se descarga la información completa del álbum, incluyendo, por ejemplo, año de lanzamiento y popularidad del álbum. No incluye la popularidad individual de cada canción | [Get an album](https://developer.spotify.com/web-api/get-album/)
+GET /v1/albums/{id} | /albums/{id} | Dada la ID de un album (obtenida a través de la lista de álbumes de un artista), se descarga la información completa del álbum, incluyendo, por ejemplo, año de lanzamiento y popularidad del álbum. No incluye la popularidad individual de cada canción | [Get an Album](https://developer.spotify.com/web-api/get-album/)
 GET /v1/albums/{id}/tracks | /albums/{id}/tracks | Dada la ID de un álbum, se descarga la lista con la información básica de cada una de sus pistas. | [Get an Album’s Tracks](https://developer.spotify.com/web-api/get-albums-tracks/)
-GET /v1/tracks/{id} | /tracks/{id} | Dada la ID de una canción, se descarga su información completa, incluyendo, por ejemplo, su popularidad individual.
+GET /v1/tracks/{id} | /tracks/{id} | Dada la ID de una canción, se descarga su información completa, incluyendo, por ejemplo, su popularidad individual. | [Get a Track](https://developer.spotify.com/web-api/get-track/)
 
 #### WebUI
-Hace uso de los proyecto DomainModel y SpotifyMetadata.
+Este módulo es la interfaz gráfica del sitio web. Utiliza los módulos DomainModel y SpotifyMetadata para funcionar y obtener la información de los artistas.
+
+Es una aplicación web que no utiliza login.
+
+La plantilla de *ASP.NET Web Application* incluye por defecto:
++ jQuery
++ Bootstrap
 
 
 ### Otras herramientas y librerías utilizadas
 * **[Kanbanery](https://dsnunez.kanbanery.com/projects/70697/board/?key=f171791a46c71075d7ef0f4f3c1a73580f9d998e)**: Para llevar cuenta de las tareas pendientes y realizadas. Cada *commit* fue asociado a alguna tarea del kanban mediante un identificador del tipo "#000000" y el *service hook* disponible entre GitHub y Kanbanery.
 * **[MusicBox Theme](https://w3layouts.com/music-box-online-music-mobile-website-template)**: Template para Bootstrap adaptada para esta aplicación.
 * **[CSS Percentege Circle](http://circle.firchow.net/)**: Hoja de estilos que facilitó la visualización de la popularidad de cada álbum.
-* **[json2csharp](http://json2csharp.com/)**: Para agilizar el mapeo de los objetos JSON que entrega la API de Spotify a clases de C#, lo que a su vez agiliza su deserialización.
+* **[json2csharp](http://json2csharp.com/)**: Para agilizar el mapeo de los objetos JSON que entrega la API de Spotify a clases de C#.
