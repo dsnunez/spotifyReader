@@ -1,13 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DomainModel;
-using System.Configuration;
-using System.Collections.Specialized;
 using System.Net;
-using SpotifyMetadata.ResponseModels;
 using Newtonsoft.Json;
 
 namespace SpotifyMetadata
