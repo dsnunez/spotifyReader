@@ -57,6 +57,7 @@
     <Compile Include="ApiSpotify.cs" />
     <Compile Include="ArtistRepository.cs" />
     <Compile Include="ArtistSearchResult.cs" />
+    <Compile Include="Page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResponseModels\Common\ExternalIds.cs" />
     <Compile Include="ResponseModels\Common\ExternalUrls.cs" />

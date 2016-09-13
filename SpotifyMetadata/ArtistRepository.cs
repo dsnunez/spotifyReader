@@ -1,4 +1,5 @@
 ﻿using DomainModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -34,9 +35,9 @@ namespace SpotifyMetadata
                 var wordFollowed = part + " ";
                 var wordLast = " " + part;
                 result.DownloadedMatches.AddRange(db.Artists
-                    .Where(a => a.NameToLower.Contains(wordFollowed) 
+                    .Where(a => a.NameToLower.Contains(wordFollowed)
                                 || a.NameToLower.Contains(wordLast)
-                                || a.NameToLower.Equals(part))); 
+                                || a.NameToLower.Equals(part)));
             }
             result.DownloadedMatches = result.DownloadedMatches.Distinct().ToList();
             var apiMatches = api.SearchArtist(query);
@@ -49,9 +50,13 @@ namespace SpotifyMetadata
             return result;
         }
 
-        public List<Artist> GetAllDownloadedArtists()
+        public Page<Artist> GetAllDownloadedArtists(int pageNum, int limit)
         {
-            return db.Artists.ToList();
+            int offset = limit * (pageNum - 1);
+            var allArtists = (from a in db.Artists orderby a.Name select a).ToList();
+            Page<Artist> page = new Page<Artist>(pageNum, offset, limit, allArtists);
+            
+            return page;
         }
 
         public int DownloadArtistBasicInfo(string spotifyId)

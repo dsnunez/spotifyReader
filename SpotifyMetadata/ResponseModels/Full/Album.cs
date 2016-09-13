@@ -34,7 +34,7 @@ namespace SpotifyMetadata.ResponseModels.Full
         public int popularity { get; set; }
         public string release_date { get; set; }
         public string release_date_precision { get; set; }
-        public Page<Simplified.Track> tracks { get; set; }
+        public ResponseModels.Common.Page<Simplified.Track> tracks { get; set; }
         public string type { get; set; }
         public string uri { get; set; }
         public int Year

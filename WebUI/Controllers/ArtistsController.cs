@@ -13,9 +13,10 @@ namespace spotifyAcid.Controllers
         private ArtistRepository repo = new ArtistRepository();
 
         // GET: Artists
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int perPage = 5)
         {
-            return View(repo.GetAllDownloadedArtists());
+            var artists = repo.GetAllDownloadedArtists(page, perPage);
+            return View(artists);
         }
 
         public ActionResult Search(string q)

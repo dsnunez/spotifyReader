@@ -10,7 +10,7 @@ namespace SpotifyMetadata.ResponseModels.SearchArtist
 {
     public class SearchArtistJsonResult
     {
-        public Page<Artist> artists { get; set; }
+        public ResponseModels.Common.Page<Artist> artists { get; set; }
     }
     
     //
