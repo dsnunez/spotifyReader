@@ -39,9 +39,9 @@ namespace SpotifyMetadata
                 result.DownloadedMatches.AddRange(db.Artists
                     .Where(a => a.NameToLower.Contains(wordFollowed) 
                                 || a.NameToLower.Contains(wordLast)
-                                || a.NameToLower.Equals(part))
-                    .ToList<Artist>()); ;
+                                || a.NameToLower.Equals(part))); 
             }
+            result.DownloadedMatches = result.DownloadedMatches.Distinct().ToList();
             var apiMatches = api.SearchArtist(query);
             var excludedIDs = new HashSet<string>(result.DownloadedMatches.Select(r => r.SpotifyId));
             result.NotDownloadedMatches = (from m in apiMatches
@@ -52,22 +52,12 @@ namespace SpotifyMetadata
             return result;
         }
 
-        public Artist UpdateArtistInfo(int? id)
-        {
-            var artist = GetArtistById(id);
-            if (artist != null)
-            {
-                artist = DownloadArtistFullInfo(artist.SpotifyId);
-            }
-            return artist;
-        }
-
         public List<Artist> GetAllDownloadedArtists()
         {
             return db.Artists.ToList();
         }
 
-        public Artist DownloadArtistFullInfo(string spotifyId)
+        public int DownloadArtistBasicInfo(string spotifyId)
         {
             var artistData = api.DownloadArtistFullData(spotifyId);
             var artistToSave = new Artist()
@@ -78,55 +68,9 @@ namespace SpotifyMetadata
                 SpotifyId = artistData.id
             };
             artistToSave = SaveArtist(artistToSave);
-
-            var albumsList = api.DownloadArtistAlbums(spotifyId);
-            foreach (var albumItem in albumsList)
-            {
-                var albumData = api.DownloadAlbumFullData(albumItem.id);
-                var albumToSave = new Album()
-                {
-                    ArtistId = artistToSave.Id,
-                    ImageUrl = albumData.MainImageUrl,
-                    Name = albumData.name,
-                    Popularity = albumData.popularity,
-                    SpotifyId = albumData.id,
-                    Year = albumData.Year
-                };
-                albumToSave = SaveAlbum(albumToSave);
-
-                var albumTracksList = api.DownloadAlbumTracks(albumToSave.SpotifyId);
-                foreach (var trackItem in albumTracksList)
-                {
-                    var trackData = api.DownloadTrackFullData(trackItem.id);
-                    var trackToSave = new Track()
-                    {
-                        AlbumId = albumToSave.Id,
-                        DurationMS = trackData.duration_ms,
-                        Name = trackData.name,
-                        SpotifyId = trackData.id,
-                        Popularity = trackData.popularity,
-                        TrackNumber = trackData.track_number,
-                        DiscNumber = trackData.disc_number
-                    };
-                    trackToSave = SaveTrack(trackToSave);
-                }
-            }
-
-            return artistToSave;
-        }
-
-        public int DownloadArtistBasicInfo(string spotifyId)
-        {
-            var artistData = api.DownloadArtistFullData(spotifyId);
-            var artistToSave = new Artist()
-            {
-                ImageUrl = artistData.MainImageUrl,
-                Name = artistData.name,
-                SpotifyId = artistData.id
-            };
-            artistToSave = SaveArtist(artistToSave);
             return artistToSave.Id;
         }
+
         public IEnumerable<dynamic> DownloadArtistAlbumList(string spotifyId)
         {
             var albumsList = api.DownloadArtistAlbums(spotifyId);
@@ -154,12 +98,14 @@ namespace SpotifyMetadata
             albumToSave = SaveAlbum(albumToSave);
             return albumToSave.Id;
         }
+
         public IEnumerable<KeyValuePair<string, string>> DownloadAlbumTrackList(string spotifyId)
         {
             var albumTracksList = api.DownloadAlbumTracks(spotifyId);
             return from t in albumTracksList
                    select new KeyValuePair<string, string>(t.id, t.name);
         }
+
         public void DownloadTrack(string spotifyId, int albumId)
         {
             var trackData = api.DownloadTrackFullData(spotifyId);
@@ -175,6 +121,7 @@ namespace SpotifyMetadata
             };
             trackToSave = SaveTrack(trackToSave);
         }
+
         private Track SaveTrack(Track trackToSave)
         {
             var track = db.Tracks.FirstOrDefault(a => a.Id == trackToSave.Id ||

@@ -46,29 +46,6 @@ namespace spotifyAcid.Controllers
             return View(artist);
         }
 
-        public ActionResult Update(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Artist artist = repo.UpdateArtistInfo(id);
-            if (artist == null)
-            {
-                return HttpNotFound();
-            }
-            return View("Details", artist);
-        }
-
-        public ActionResult Download(string id)
-        {
-            if (String.IsNullOrWhiteSpace(id))
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Artist artist = repo.DownloadArtistFullInfo(id);
-            return View("Details", artist);
-        }
         public ActionResult DownloadArtistInfo(string id)
         {
             if (String.IsNullOrWhiteSpace(id))
