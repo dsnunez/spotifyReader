@@ -28,6 +28,7 @@ namespace SpotifyMetadata
         string ApiGetRequest(string req, bool useBaseUrl = true)
         {
             WebClient client = new WebClient();
+            client.Encoding = System.Text.Encoding.UTF8;
             var response = useBaseUrl ? client.DownloadString(BaseUrl + req): client.DownloadString(req);
             return response;
         }
