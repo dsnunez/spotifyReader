@@ -76,7 +76,7 @@ namespace SpotifyMetadata
                    {
                        Key = a.id,
                        Value = a.name,
-                       Img = a.images != null && a.images.Count > 0 && a.images[0] != null ? a.images[0].url : ""
+                       Img = a.images != null && a.images.Count > 0 && a.images[0] != null ? a.images[0].url : "/images/no-img.png"
                    };
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -32,6 +33,15 @@ namespace DomainModel
 
         public string ImageUrl { get; set; }
 
+        [NotMapped]
+        public string ImageUrlWithDefault
+        {
+            get
+            {
+                return !String.IsNullOrWhiteSpace(ImageUrl) ? ImageUrl : "/images/no-img.png";
+            }
+        }
+
         public int ArtistId { get; set; }
         [ForeignKey("ArtistId")]
         public virtual Artist Artist { get; set; }
@@ -48,7 +58,7 @@ namespace DomainModel
                 {
                     return Tracks.Aggregate((currentMax, x) =>
                             (currentMax == null || x.DurationMS > currentMax.DurationMS ? x : currentMax));
-                    
+
                 }
                 return null;
             }
