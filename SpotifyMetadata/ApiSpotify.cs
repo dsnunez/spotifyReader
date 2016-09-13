@@ -14,16 +14,7 @@ namespace SpotifyMetadata
 {
     public class ApiSpotify
     {
-        string ClientId { get; set; }
-        string ClientSecret { get; set; }
         string BaseUrl = "https://api.spotify.com/v1/";
-
-        public ApiSpotify()
-        {
-            NameValueCollection settings = (NameValueCollection)ConfigurationManager.GetSection("apiKeys");
-            ClientId = settings["SpotifyClientId"];
-            ClientSecret = settings["SpotifyClientSecret"];
-        }
 
         string ApiGetRequest(string req, bool useBaseUrl = true)
         {
