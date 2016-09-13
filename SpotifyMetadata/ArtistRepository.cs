@@ -53,7 +53,7 @@ namespace SpotifyMetadata
         public Page<Artist> GetAllDownloadedArtists(int pageNum, int limit)
         {
             int offset = limit * (pageNum - 1);
-            var allArtists = (from a in db.Artists orderby a.Name select a).ToList();
+            var allArtists = (from a in db.Artists orderby a.Name select a);
             Page<Artist> page = new Page<Artist>(pageNum, offset, limit, allArtists);
             
             return page;
