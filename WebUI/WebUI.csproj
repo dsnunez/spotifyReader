@@ -169,7 +169,7 @@
     <Content Include="Scripts\modernizr.custom.53451.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\search.js" />
+    <Content Include="Scripts\_layout.js" />
     <Content Include="Scripts\_albumDetail.js" />
     <Content Include="Scripts\_artistDownload.js" />
     <Content Include="Scripts\_pagedResults.js" />
