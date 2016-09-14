@@ -25,5 +25,7 @@ namespace DomainModel
 
         [InverseProperty("Artist")]
         public virtual List<Album> Albums { get; set; }
+
+        public DateTime LastUpdated { get; set; }
     }
 }

@@ -32,5 +32,7 @@ namespace DomainModel
                 return String.Format("{0:00}:{1:00}", minutes, seconds);
             }
         }
+
+        public DateTime LastUpdated { get; set; }
     }
 }

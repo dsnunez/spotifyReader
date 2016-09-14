@@ -83,6 +83,10 @@
     <Compile Include="Migrations\201609121936082_cacheAlbumNameToLower.Designer.cs">
       <DependentUpon>201609121936082_cacheAlbumNameToLower.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609142055421_addTimestampColumArtistAlbumTrack.cs" />
+    <Compile Include="Migrations\201609142055421_addTimestampColumArtistAlbumTrack.Designer.cs">
+      <DependentUpon>201609142055421_addTimestampColumArtistAlbumTrack.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpotifyContext.cs" />
@@ -116,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609121936082_cacheAlbumNameToLower.resx">
       <DependentUpon>201609121936082_cacheAlbumNameToLower.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609142055421_addTimestampColumArtistAlbumTrack.resx">
+      <DependentUpon>201609142055421_addTimestampColumArtistAlbumTrack.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

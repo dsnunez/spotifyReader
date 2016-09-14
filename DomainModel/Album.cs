@@ -63,5 +63,7 @@ namespace DomainModel
                 return null;
             }
         }
+
+        public DateTime LastUpdated { get; set; }
     }
 }
