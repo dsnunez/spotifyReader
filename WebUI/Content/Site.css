@@ -52,3 +52,7 @@ td > .progress {
 .trackList .progress {
     height: 15px;
 }
+
+.clickable-link:hover {
+    cursor: pointer; cursor: hand;
+}

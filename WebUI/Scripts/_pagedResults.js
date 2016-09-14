@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
 
     bindClicks();
+    //markClickableLinks();
 
 });
 
