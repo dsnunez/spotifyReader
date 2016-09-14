@@ -11,6 +11,10 @@ namespace SpotifyMetadata
         SpotifyContext db = new SpotifyContext();
         ApiSpotify api = new ApiSpotify();
 
+        public Artist GetArtistById(int? id)
+        {
+            return id == null ? null : db.Artists.FirstOrDefault(a => a.Id == (int)id);
+        }
         public void DeleteAll()
         {
             db.Tracks.RemoveRange(db.Tracks);
@@ -44,12 +48,12 @@ namespace SpotifyMetadata
         public Page<Artist> SearchDownloaded(string query, int pageNum, int limit, IEnumerable<string> queryParts = null)
         {
             queryParts = queryParts ?? QueryParts(query);
-            var q = SearchDownloadedQuery(queryParts);
+            var q = QueryableForSearchDownloaded(queryParts);
             var page = new Page<Artist>(pageNum, limit, q, query);
             return page;
         }
 
-        private IOrderedQueryable<Artist> SearchDownloadedQuery(IEnumerable<string> queryParts)
+        private IOrderedQueryable<Artist> QueryableForSearchDownloaded(IEnumerable<string> queryParts)
         {
             return (from a in db.Artists
                     where queryParts.Any(part => a.NameToLower.Contains(part + " ")
@@ -66,7 +70,7 @@ namespace SpotifyMetadata
 
             queryParts = queryParts ?? QueryParts(query);
 
-            var downloadedMatches = SearchDownloadedQuery(queryParts);
+            var downloadedMatches = QueryableForSearchDownloaded(queryParts);
             var excludedIDs = new HashSet<string>(downloadedMatches.Select(r => r.SpotifyId));
 
             var q = (from m in apiMatches
@@ -148,7 +152,7 @@ namespace SpotifyMetadata
                 TrackNumber = trackData.track_number,
                 DiscNumber = trackData.disc_number
             };
-            trackToSave = SaveTrack(trackToSave);
+            SaveTrack(trackToSave);
         }
 
         private Track SaveTrack(Track trackToSave)
@@ -223,11 +227,6 @@ namespace SpotifyMetadata
 
             db.SaveChanges();
             return artist;
-        }
-
-        public Artist GetArtistById(int? id)
-        {
-            return id == null ? null : db.Artists.FirstOrDefault(a => a.Id == (int)id);
         }
     }
 }
