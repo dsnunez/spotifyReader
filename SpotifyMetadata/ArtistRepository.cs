@@ -33,6 +33,7 @@ namespace SpotifyMetadata
 
         private IEnumerable<string> QueryParts(string query)
         {
+            query = System.Web.HttpUtility.UrlDecode(query);
             query = query.ToLower();
 
             //Separar la query entre palabras sueltas y frases entre comillas, para que se parezca al comportamiento de la API
