@@ -6,30 +6,38 @@ namespace SpotifyMetadata
 {
     public class Page<T>
     {
-        public Page(int pageNum, int limit, IOrderedQueryable<T> completeList, string query)
+        private const int _defaultPerPage = 5;
+        public Page(int pageNum, int perPage, IOrderedQueryable<T> completeList, string query)
         {
+            pageNum = Math.Max(pageNum, 1);
+            perPage = perPage < 0 ? _defaultPerPage : perPage;
+
             int completeListCount = completeList.Count();
-            int offset = limit * (pageNum - 1);
+            int lastPossibleIndex = completeListCount - 1;
+            int maxPages = (int)Math.Ceiling((double)completeListCount / perPage);
+            int lastPageResultCount = completeListCount % perPage;
 
-            offset = Math.Max(offset, 0);
-            offset = Math.Min(offset, completeListCount);
-            Offset = offset;
+            int skip = perPage * (pageNum - 1);
+            OutOfBounds = skip > lastPossibleIndex;
+            skip = Math.Min(skip, completeListCount - lastPageResultCount);
 
-            int limitTruncated = Math.Max(limit, 0);
-            Limit = limitTruncated;
-            limitTruncated = limitTruncated == 0 ? limitTruncated = completeListCount - offset : limitTruncated;
-            limitTruncated = Math.Min(limitTruncated, completeListCount - offset);
+            int take = perPage;
+            take = take == 0 ? take = completeListCount : take;
 
-            Items = completeList.Skip(offset).Take(limitTruncated).ToList();
+            Items = completeList.Skip(skip).Take(take).ToList();
 
-            NextPage = offset + limit < completeListCount;
-            CurrentPage = pageNum;
+            Offset = skip;
+            PerPage = perPage;
+            NextPage = skip + take < completeListCount;
+            CurrentPage = Math.Min(pageNum, maxPages);
             Query = query;
         }
 
         public List<T> Items { get; internal set; }
-        public int Limit { get; internal set; }
+        public int PerPage { get; internal set; }
         public int Offset { get; internal set; }
+
+        public bool OutOfBounds { get; internal set; }
 
         public bool NextPage { get; internal set; }
 

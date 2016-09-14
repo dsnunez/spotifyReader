@@ -25,7 +25,7 @@
         {
             <span id="previous-page-downloaded"
                   data-page="@(Model.CurrentPage -1 )"
-                  data-limit="@Model.Limit"
+                  data-limit="@Model.PerPage"
                   data-control="Artists"
                   data-action="@pagedAction"
                   data-search-query="@dataSearchQuery"
@@ -38,7 +38,7 @@
         {
             <span id="next-page-downloaded"
                   data-page="@(Model.CurrentPage + 1 )"
-                  data-limit="@Model.Limit"
+                  data-limit="@Model.PerPage"
                   data-control="Artists"
                   data-action="@pagedAction"
                   data-search-query="@dataSearchQuery"

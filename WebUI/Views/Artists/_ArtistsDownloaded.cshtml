@@ -20,6 +20,13 @@
     {
         <div id="artists-downloaded-div">
             @{
+                if (Model.OutOfBounds)
+                {
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Ojo!</strong> No tenemos tantos resultados como para llegar a la página que nos pediste, así que te mostramos la última página :)
+                    </div>
+                }
                 ViewData.Add("parentDiv", "artists-downloaded-div");
                 ViewData.Add("searchType", "downloaded");
                 Html.RenderPartial("_ArtistsDownloadedTable", Model, ViewData);

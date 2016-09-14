@@ -20,10 +20,17 @@
     {
         <div id="artists-spotify-div">
             @{
+                if (Model.OutOfBounds)
+                {
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Ojo!</strong> No tenemos tantos resultados como para llegar a la página @Model.CurrentPage, así que te mostramos la última página :)
+                    </div>
+                }
                 ViewData.Add("parentDiv", "artists-spotify-div");
                 ViewData.Add("searchType", "spotify");
                 Html.RenderPartial("_ArtistsSpotifyTable", Model, ViewData);
             }
         </div>
-    }
+                }
 </div>
