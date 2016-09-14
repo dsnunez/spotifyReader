@@ -29,6 +29,7 @@ namespace spotifyAcid.Controllers
             return View(repo.SearchArtist(q, page, perPage));
         }
 
+        [HttpPost]
         public ActionResult SearchDownloadedPartial(string q = "", int page = 1, int perPage = 5)
         {
             ViewData.Add("search", !String.IsNullOrWhiteSpace(q));
@@ -40,6 +41,7 @@ namespace spotifyAcid.Controllers
             return PartialView("_ArtistsDownloadedTable", artists);
         }
 
+        [HttpPost]
         public ActionResult SearchSpotifyPartial(string q, int page = 1, int perPage = 5)
         {
             if (String.IsNullOrWhiteSpace(q))
@@ -56,7 +58,6 @@ namespace spotifyAcid.Controllers
             return PartialView("_ArtistsSpotifyTable", artists);
         }
 
-        // GET: Artists/View/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -72,6 +73,7 @@ namespace spotifyAcid.Controllers
             return View(artist);
         }
 
+        [HttpPost]
         public ActionResult DownloadArtistInfo(string id)
         {
             if (String.IsNullOrWhiteSpace(id))
@@ -91,6 +93,8 @@ namespace spotifyAcid.Controllers
                 }
             };
         }
+
+        [HttpPost]
         public ActionResult DownloadAlbumInfo(string id, int artist)
         {
             if (String.IsNullOrWhiteSpace(id))
@@ -110,6 +114,8 @@ namespace spotifyAcid.Controllers
                 }
             };
         }
+
+        [HttpPost]
         public ActionResult DownloadTrackInfo(string id, int album)
         {
             if (String.IsNullOrWhiteSpace(id))
