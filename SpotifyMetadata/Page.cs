@@ -6,9 +6,10 @@ namespace SpotifyMetadata
 {
     public class Page<T>
     {
-        public Page(int pageNum, int offset, int limit, IOrderedQueryable<T> completeList)
+        public Page(int pageNum, int limit, IOrderedQueryable<T> completeList, string query)
         {
             int completeListCount = completeList.Count();
+            int offset = limit * (pageNum - 1);
 
             offset = Math.Max(offset, 0);
             offset = Math.Min(offset, completeListCount);
@@ -18,12 +19,12 @@ namespace SpotifyMetadata
             Limit = limitTruncated;
             limitTruncated = limitTruncated == 0 ? limitTruncated = completeListCount - offset : limitTruncated;
             limitTruncated = Math.Min(limitTruncated, completeListCount - offset);
-            
 
             Items = completeList.Skip(offset).Take(limitTruncated).ToList();
 
             NextPage = offset + limit < completeListCount;
             CurrentPage = pageNum;
+            Query = query;
         }
 
         public List<T> Items { get; internal set; }
@@ -33,6 +34,8 @@ namespace SpotifyMetadata
         public bool NextPage { get; internal set; }
 
         public int CurrentPage { get; internal set; }
+
+        public string Query { get; set; }
 
     }
 }

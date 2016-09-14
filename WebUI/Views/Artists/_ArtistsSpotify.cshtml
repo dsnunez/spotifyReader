@@ -1,7 +1,7 @@
-﻿@model IEnumerable<DomainModel.Artist>
+﻿@model SpotifyMetadata.Page<DomainModel.Artist>
 <h2>Artistas online</h2>
 <div class="single">
-    @if (Model.Count() == 0)
+    @if (Model.Items.Count() == 0)
     {
         <div class="jumbotron">
             @if (ViewData["downloadedN"] != null && (int)ViewData["downloadedN"] == 0)
@@ -18,21 +18,12 @@
     }
     else
     {
-        <table class="table">
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td style="width:60px"><img alt="@item.Name" src="@item.ImageUrlWithDefault" height="40" width="40" /></td>
-                    <td>
-                        <span class="h3">@Html.DisplayFor(modelItem => item.Name)</span>
-                    </td>
-                    <td style="width:100px">
-                        <span class="btn btn-success download-spotify" data-id="@item.SpotifyId" data-name="@item.Name">
-                            Descargar
-                        </span>
-                    </td>
-                </tr>
+        <div id="artists-spotify-div">
+            @{
+                ViewData.Add("parentDiv", "artists-spotify-div");
+                ViewData.Add("searchType", "spotify");
+                Html.RenderPartial("_ArtistsSpotifyTable", Model, ViewData);
             }
-        </table>
+        </div>
     }
 </div>

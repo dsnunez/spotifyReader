@@ -11,7 +11,7 @@ function bindClicks() {
 
         var page = $(this).data("page");
         var limit = $(this).data("limit");
-        var query = $(this).data("search");
+        var query = $(this).data("search-query");
         var params = {
             page: page,
             perPage: limit,
@@ -19,7 +19,7 @@ function bindClicks() {
         };
 
         var control = $(this).data("control");
-        var action = $(this).data("action")+"Partial";
+        var action = "Search" + $(this).data("action")+"Partial";
 
         $.ajax({
             url: '/' + control + '/' + action,

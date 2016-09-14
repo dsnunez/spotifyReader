@@ -193,6 +193,8 @@
     <Content Include="Views\Artists\_ArtistsSpotify.cshtml" />
     <Content Include="Views\Artists\_DownloadingArtist.cshtml" />
     <Content Include="Views\Artists\_ArtistsDownloadedTable.cshtml" />
+    <Content Include="Views\Artists\_ArtistsSpotifyTable.cshtml" />
+    <Content Include="Views\Artists\_Paging.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

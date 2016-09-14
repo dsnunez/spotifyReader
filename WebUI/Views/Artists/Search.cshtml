@@ -8,6 +8,7 @@
     @Scripts.Render("~/Scripts/modal-view.js")
     @Scripts.Render("~/Scripts/ajax-wrap.js")
     @Scripts.Render("~/Scripts/_artistDownload.js")
+    @Scripts.Render("~/Scripts/_pagedResults.js")
 }
 @{
     ViewBag.Title = "Resultados de la búsqueda";
@@ -15,8 +16,12 @@
     Html.RenderPartial("_DownloadingArtist");
 
     Html.RenderPartial("_ArtistsDownloaded", Model.DownloadedMatches,
-        new ViewDataDictionary { { "search", true }, { "searchQuery", Model.Query} });
+        new ViewDataDictionary { { "search", true }, { "searchQuery", Model.DownloadedMatches.Query } });
 
     Html.RenderPartial("_ArtistsSpotify", Model.NotDownloadedMatches,
-        new ViewDataDictionary { { "downloadedN", Model.DownloadedMatches.Count() } });
+        new ViewDataDictionary {
+            { "search", true },
+            { "searchQuery", Model.NotDownloadedMatches.Query } ,
+            { "downloadedN", Model.DownloadedMatches.Items.Count() }
+        });
 }

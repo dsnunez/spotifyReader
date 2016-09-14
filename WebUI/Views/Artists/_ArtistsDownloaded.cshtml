@@ -21,8 +21,9 @@
         <div id="artists-downloaded-div">
             @{
                 ViewData.Add("parentDiv", "artists-downloaded-div");
+                ViewData.Add("searchType", "downloaded");
                 Html.RenderPartial("_ArtistsDownloadedTable", Model, ViewData);
             }
         </div>
-    }
+                }
 </div>

@@ -19,23 +19,40 @@ namespace spotifyAcid.Controllers
             return View(artists);
         }
 
-        public ActionResult IndexPartial(int page = 1, int perPage = 5)
-        {
-            ViewData.Add("search", false);
-            ViewData.Add("searchQuery", "");
-            ViewData.Add("parentDiv", "artists-downloaded-div");
-
-            var artists = repo.GetAllDownloadedArtists(page, perPage);
-            return PartialView("_ArtistsDownloadedTable", artists);
-        }
-
-        public ActionResult Search(string q)
+        public ActionResult Search(string q, int page = 1, int perPage = 5)
         {
             if (String.IsNullOrWhiteSpace(q))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(repo.SearchArtist(q));
+            return View(repo.SearchArtist(q, page, perPage));
+        }
+
+        public ActionResult SearchDownloadedPartial(string q = "", int page = 1, int perPage = 5)
+        {
+            ViewData.Add("search", !String.IsNullOrWhiteSpace(q));
+            ViewData.Add("searchQuery", String.IsNullOrWhiteSpace(q) ? "" : q);
+            ViewData.Add("searchType", "downloaded");
+            ViewData.Add("parentDiv", "artists-downloaded-div");
+
+            var artists = String.IsNullOrWhiteSpace(q) ? repo.GetAllDownloadedArtists(page, perPage) : repo.SearchDownloaded(q, page, perPage);
+            return PartialView("_ArtistsDownloadedTable", artists);
+        }
+
+        public ActionResult SearchSpotifyPartial(string q, int page = 1, int perPage = 5)
+        {
+            if (String.IsNullOrWhiteSpace(q))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            ViewData.Add("search", true);
+            ViewData.Add("searchQuery", q);
+            ViewData.Add("searchType", "spotify");
+            ViewData.Add("parentDiv", "artists-spotify-div");
+
+            var artists = repo.SearchSpotify(q, page, perPage);
+            return PartialView("_ArtistsSpotifyTable", artists);
         }
 
         // GET: Artists/View/5

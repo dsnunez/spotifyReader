@@ -4,14 +4,8 @@ using DomainModel;
 namespace SpotifyMetadata
 {
     public class ArtistSearchResult
-    {
-        public string Query { get; set; }
-        public List<Artist> DownloadedMatches { get; internal set; }
-        public List<Artist> NotDownloadedMatches { get; internal set; }
-
-        public ArtistSearchResult()
-        {
-            DownloadedMatches = new List<Artist>();
-        }
+    { 
+        public Page<Artist> DownloadedMatches { get; internal set; }
+        public Page<Artist> NotDownloadedMatches { get; internal set; }
     }
 }

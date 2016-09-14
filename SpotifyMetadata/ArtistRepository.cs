@@ -19,42 +19,68 @@ namespace SpotifyMetadata
             db.SaveChanges();
         }
 
-        public ArtistSearchResult SearchArtist(string query)
+        public ArtistSearchResult SearchArtist(string query, int pageNum = 1, int limit = 5)
         {
-            ArtistSearchResult result = new ArtistSearchResult() { Query = query };
-            query = query.ToLower();
+            ArtistSearchResult result = new ArtistSearchResult();
 
-            //Separar la query entre palabras sueltas y frases entre comillas, para que se parezca al comportamiento de la API
-            var queryParts = (from Match match in Regex.Matches(query, @"[\""].+?[\""]|[^ ]+")
-                              select match.ToString()).ToList();
+            var queryParts = QueryParts(query);
 
-
-            foreach (var q in queryParts)
-            {
-                var part = q.Trim('"');
-                var wordFollowed = part + " ";
-                var wordLast = " " + part;
-                result.DownloadedMatches.AddRange(db.Artists
-                    .Where(a => a.NameToLower.Contains(wordFollowed)
-                                || a.NameToLower.Contains(wordLast)
-                                || a.NameToLower.Equals(part)));
-            }
-            result.DownloadedMatches = result.DownloadedMatches.Distinct().ToList();
-            var apiMatches = api.SearchArtist(query);
-            var excludedIDs = new HashSet<string>(result.DownloadedMatches.Select(r => r.SpotifyId));
-            result.NotDownloadedMatches = (from m in apiMatches
-                                           where !excludedIDs.Contains(m.id)
-                                           select new Artist { SpotifyId = m.id, Name = m.name, ImageUrl = m.MainImageUrl })
-                                          .ToList();
+            result.DownloadedMatches = SearchDownloaded(query, pageNum, limit, queryParts);
+            result.NotDownloadedMatches = SearchSpotify(query, pageNum, limit, queryParts);
 
             return result;
         }
 
+        private IEnumerable<string> QueryParts(string query)
+        {
+            query = query.ToLower();
+
+            //Separar la query entre palabras sueltas y frases entre comillas, para que se parezca al comportamiento de la API
+            return (from Match match in Regex.Matches(query, @"[\""].+?[\""]|[^ ]+")
+                    select match.ToString().Trim('"'));
+        }
+
+        public Page<Artist> SearchDownloaded(string query, int pageNum, int limit, IEnumerable<string> queryParts = null)
+        {
+            queryParts = queryParts ?? QueryParts(query);
+            var q = SearchDownloadedQuery(queryParts);
+            var page = new Page<Artist>(pageNum, limit, q, query);
+            return page;
+        }
+
+        private IOrderedQueryable<Artist> SearchDownloadedQuery(IEnumerable<string> queryParts)
+        {
+            return (from a in db.Artists
+                    where queryParts.Any(part => a.NameToLower.Contains(part + " ")
+                                || a.NameToLower.Contains(" " + part)
+                                || a.NameToLower.Equals(part))
+                    orderby a.Name
+                    select a);
+        }
+
+        public Page<Artist> SearchSpotify(string query, int pageNum, int limit, IEnumerable<string> queryParts = null)
+        {
+            query = query.ToLower();
+            var apiMatches = api.SearchArtist(query);
+
+            queryParts = queryParts ?? QueryParts(query);
+
+            var downloadedMatches = SearchDownloadedQuery(queryParts);
+            var excludedIDs = new HashSet<string>(downloadedMatches.Select(r => r.SpotifyId));
+
+            var q = (from m in apiMatches
+                     where !excludedIDs.Contains(m.id)
+                     select new Artist { SpotifyId = m.id, Name = m.name, ImageUrl = m.MainImageUrl })
+                     .AsQueryable()
+                     .OrderBy(a => a.Name);
+
+            return new Page<Artist>(pageNum, limit, q, query);
+        }
+
         public Page<Artist> GetAllDownloadedArtists(int pageNum, int limit)
         {
-            int offset = limit * (pageNum - 1);
             var allArtists = (from a in db.Artists orderby a.Name select a);
-            Page<Artist> page = new Page<Artist>(pageNum, offset, limit, allArtists);
+            Page<Artist> page = new Page<Artist>(pageNum, limit, allArtists, "");
 
             return page;
         }
