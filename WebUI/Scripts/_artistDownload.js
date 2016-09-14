@@ -5,7 +5,7 @@
         downloadArtistInfo(id,name);
     });
 
-    $(".upload-spotify").click(function () {
+    $(".update-spotify").click(function () {
         var id = $(this).data("id");
         var name = $(this).data("name");
         downloadArtistInfo(id,name);

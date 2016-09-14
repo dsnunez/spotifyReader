@@ -14,8 +14,13 @@
 @{
     ViewBag.Title = Model.Name;
 }
-
-<h2>@Html.DisplayFor(model => model.Name)</h2>
+<h2>
+    @Html.DisplayFor(model => model.Name)
+    <small>
+        Actualizado el @Model.LastUpdated
+        <span class="btn btn-info update-spotify" data-id="@Model.SpotifyId" data-name="@Model.Name"> @Html.GlyphIcon("refresh") </span>
+    </small>
+</h2>
 <div class="section group">
     <div class="cont">
         @foreach (var album in Model.Albums)
@@ -24,5 +29,3 @@
         }
     </div>
 </div>
-
-
