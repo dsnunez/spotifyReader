@@ -13,6 +13,7 @@
 }
 @{
     ViewBag.Title = Model.Name;
+    Html.RenderPartial("_DownloadingArtist");
 }
 <h2>
     @Html.DisplayFor(model => model.Name)

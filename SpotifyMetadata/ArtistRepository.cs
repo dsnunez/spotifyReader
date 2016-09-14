@@ -169,6 +169,9 @@ namespace SpotifyMetadata
                 track.DurationMS = trackToSave.DurationMS;
                 track.TrackNumber = trackToSave.TrackNumber;
             }
+
+            track.LastUpdated = DateTime.Now;
+
             db.SaveChanges();
             return track;
         }
@@ -191,6 +194,9 @@ namespace SpotifyMetadata
                 album.Year = albumToSave.Year;
                 album.ArtistId = albumToSave.ArtistId;
             }
+
+            album.LastUpdated = DateTime.Now;
+
             db.SaveChanges();
             return album;
         }
@@ -211,6 +217,9 @@ namespace SpotifyMetadata
                 artist.NameToLower = artistToSave.Name.ToLower();
                 artist.SpotifyId = artistToSave.SpotifyId;
             }
+
+            artist.LastUpdated= DateTime.Now;
+
             db.SaveChanges();
             return artist;
         }
