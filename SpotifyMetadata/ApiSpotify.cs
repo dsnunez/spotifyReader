@@ -67,9 +67,6 @@ namespace SpotifyMetadata
         {
             if (!String.IsNullOrWhiteSpace(query))
             {
-                //[Spotify Doc]: Encode spaces with the hex code %20 or +.
-                query = HttpUtility.UrlEncode(query);
-
                 var req = String.Format("search/?q={0}&type=artist", query);
                 var response = ApiGetRequest(req);
                 var artistJsonResult = GetObjectFromJson<ResponseModels.SearchArtist.SearchArtistJsonResult>(response);

@@ -19,6 +19,7 @@ namespace spotifyAcid.Controllers
             return View(artists);
         }
 
+        [HttpPost]
         public ActionResult Search(string q, int page = 1, int perPage = 5)
         {
             if (String.IsNullOrWhiteSpace(q))
