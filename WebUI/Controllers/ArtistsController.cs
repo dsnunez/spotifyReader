@@ -19,6 +19,16 @@ namespace spotifyAcid.Controllers
             return View(artists);
         }
 
+        public ActionResult IndexPartial(int page = 1, int perPage = 5)
+        {
+            ViewData.Add("search", false);
+            ViewData.Add("searchQuery", "");
+            ViewData.Add("parentDiv", "artists-downloaded-div");
+
+            var artists = repo.GetAllDownloadedArtists(page, perPage);
+            return PartialView("_ArtistsDownloadedTable", artists);
+        }
+
         public ActionResult Search(string q)
         {
             if (String.IsNullOrWhiteSpace(q))

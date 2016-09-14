@@ -15,7 +15,7 @@
     Html.RenderPartial("_DownloadingArtist");
 
     Html.RenderPartial("_ArtistsDownloaded", Model.DownloadedMatches,
-        new ViewDataDictionary { { "search", true } });
+        new ViewDataDictionary { { "search", true }, { "searchQuery", Model.Query} });
 
     Html.RenderPartial("_ArtistsSpotify", Model.NotDownloadedMatches,
         new ViewDataDictionary { { "downloadedN", Model.DownloadedMatches.Count() } });

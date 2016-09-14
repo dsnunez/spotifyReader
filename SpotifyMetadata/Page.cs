@@ -14,12 +14,13 @@ namespace SpotifyMetadata
             offset = Math.Min(offset, completeListCount);
             Offset = offset;
 
-            limit = Math.Max(limit, 0);
-            limit = limit == 0 ? limit = completeListCount - offset : limit;
-            limit = Math.Min(limit, completeListCount - offset);
-            Limit = limit;
+            int limitTruncated = Math.Max(limit, 0);
+            Limit = limitTruncated;
+            limitTruncated = limitTruncated == 0 ? limitTruncated = completeListCount - offset : limitTruncated;
+            limitTruncated = Math.Min(limitTruncated, completeListCount - offset);
+            
 
-            Items = completeList.Skip(offset).Take(limit).ToList();
+            Items = completeList.Skip(offset).Take(limitTruncated).ToList();
 
             NextPage = offset + limit < completeListCount;
             CurrentPage = pageNum;

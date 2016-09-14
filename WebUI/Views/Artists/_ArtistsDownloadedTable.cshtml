@@ -1,7 +1,7 @@
 ﻿@model SpotifyMetadata.Page<DomainModel.Artist>
 <table id="artists-downloaded-table" class="table table-condensed">
     @foreach (var item in Model.Items)
-            {
+    {
         <tr>
             <td style="width:60px"><img alt="@item.Name" src="@item.ImageUrlWithDefault" height="40" width="40" /></td>
             <td>
@@ -22,16 +22,47 @@
 </table>
 <div id="artists-downloaded-pagging-header" class="right">
     <div class="btn-group" role="group">
+
+        @{
+            string pagedAction = "";
+            string dataSearch = "";
+            if (ViewData["search"] != null && (bool)ViewData["search"] == false)
+            {
+                pagedAction = "Index";
+            }
+            else
+            {
+                pagedAction = "Search";
+                dataSearch = String.Format("data-search=\"{0}\"", ViewData["searchQuery"]);
+            }
+
+            string parentDiv = ViewData["parentDiv"].ToString();
+        }
+
         @if (Model.Offset > 0)
         {
-            <span id="previous-page-downloaded" data-page="@(Model.CurrentPage -1 )" class="btn btn-default">
+            <span id="previous-page-downloaded"
+                  data-page="@(Model.CurrentPage -1 )"
+                  data-limit="@Model.Limit"
+                  data-control="Artists"
+                  data-action="@pagedAction"
+                  @dataSearch 
+                  data-div="@parentDiv"
+                  class="btn btn-default page-control">
                 @Html.GlyphIcon("backward") Anterior
             </span>
         }
         @if (Model.NextPage)
         {
-            <span id="next-page-downloaded" data-page="@(Model.CurrentPage + 1 )" class="btn btn-default">
-                Siguiente @Html.GlyphIcon("forward") 
+            <span id="next-page-downloaded"
+                  data-page="@(Model.CurrentPage + 1 )"
+                  data-limit="@Model.Limit"
+                  data-control="Artists"
+                  data-action="@pagedAction"
+                  @dataSearch 
+                  data-div="@parentDiv"
+                  class="btn btn-default page-control">
+                Siguiente @Html.GlyphIcon("forward")
             </span>
         }
     </div>

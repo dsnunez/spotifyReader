@@ -8,6 +8,7 @@
     @Scripts.Render("~/Scripts/modal-view.js")
     @Scripts.Render("~/Scripts/ajax-wrap.js")
     @Scripts.Render("~/Scripts/_artistDownload.js")
+    @Scripts.Render("~/Scripts/_pagedResults.js")
 }
 @{
     ViewBag.Title = "Artistas";
@@ -15,5 +16,5 @@
     Html.RenderPartial("_DownloadingArtist");
 
     Html.RenderPartial("_ArtistsDownloaded", Model,
-        new ViewDataDictionary { { "search", false } });
+        new ViewDataDictionary { { "search", false }, { "searchQuery", "" } });
 }

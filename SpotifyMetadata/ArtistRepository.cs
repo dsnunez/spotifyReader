@@ -21,7 +21,7 @@ namespace SpotifyMetadata
 
         public ArtistSearchResult SearchArtist(string query)
         {
-            ArtistSearchResult result = new ArtistSearchResult();
+            ArtistSearchResult result = new ArtistSearchResult() { Query = query };
             query = query.ToLower();
 
             //Separar la query entre palabras sueltas y frases entre comillas, para que se parezca al comportamiento de la API
@@ -55,7 +55,7 @@ namespace SpotifyMetadata
             int offset = limit * (pageNum - 1);
             var allArtists = (from a in db.Artists orderby a.Name select a);
             Page<Artist> page = new Page<Artist>(pageNum, offset, limit, allArtists);
-            
+
             return page;
         }
 

@@ -20,7 +20,8 @@
     {
         <div id="artists-downloaded-div">
             @{
-                Html.RenderPartial("_ArtistsDownloadedTable");
+                ViewData.Add("parentDiv", "artists-downloaded-div");
+                Html.RenderPartial("_ArtistsDownloadedTable", Model, ViewData);
             }
         </div>
     }
