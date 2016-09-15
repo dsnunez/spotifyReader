@@ -1,8 +1,5 @@
 ﻿$(document).ready(function () {
-
     bindClicks();
-    //markClickableLinks();
-
 });
 
 function bindClicks() {
@@ -31,6 +28,7 @@ function bindClicks() {
             success: function (data) {
                 $(divToUpdate).html(data);
                 bindClicks();
+                markClickableLinks();
             },
             dataType: 'html'
         });

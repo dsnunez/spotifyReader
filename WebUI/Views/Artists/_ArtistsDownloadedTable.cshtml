@@ -1,11 +1,14 @@
 ﻿@model SpotifyMetadata.Page<DomainModel.Artist>
-<table id="artists-downloaded-table" class="table table-condensed table-hover">
+<table id="artists-downloaded-table" class="table table-condensed table-hover artist-table">
     @foreach (var item in Model.Items)
     {
         <tr class="clickable-link" data-href="@Url.Action("Details","Artists", new { id = item.Id })">
             <td style="width:60px"><img alt="@item.Name" src="@item.ImageUrlWithDefault" height="40" width="40" /></td>
             <td>
                 <span class="h3">@Html.DisplayFor(modelItem => item.Name)</span>
+            </td>
+            <td class="last-updated">
+                @Html.GlyphIcon("download") @item.LastUpdated
             </td>
             <td style="width:60px">
                 <span class="btn btn-info clickable-link" data-href="@Url.Action("Details","Artists", new { id = item.Id })">

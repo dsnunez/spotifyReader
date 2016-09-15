@@ -1,6 +1,6 @@
 ﻿@model SpotifyMetadata.Page<DomainModel.Artist>
 
-<table id="artists-spotify-table download-spotify" class="table table-condensed table-hover">
+<table id="artists-spotify-table" class="table table-condensed table-hover artist-table">
     @foreach (var item in Model.Items)
             {
         <tr class="download-spotify" data-id="@item.SpotifyId" data-name="@item.Name">

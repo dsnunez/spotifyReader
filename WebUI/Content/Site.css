@@ -48,6 +48,23 @@ td > .progress {
     height: 15px;
 }
 
+.download-spotify:hover,
+.update-spotify:hover,
 .clickable-link:hover {
     cursor: pointer; cursor: hand;
+}
+
+
+.artist-table {
+}
+
+.artist-table > tbody > tr > td {
+    vertical-align:middle;
+}
+
+td.last-updated {
+    width: 150px;
+    font-size:80%;
+    color:#999;
+    vertical-align:middle;
 }
