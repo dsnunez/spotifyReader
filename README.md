@@ -1,6 +1,6 @@
 # Spotify Metadata Reader
 
-**Spotify Metadata Reader** es una aplicación web que permite descargar, desde [Spotify](https://www.spotify.com), la información sobre los álbumes y canciones de tus artistas favoritos, mostrando ciertas estadísticas de esta información. Este proyecto fue desarrollado como parte de una evaluación técnica.
+**Spotify Metadata Reader** es una aplicación web, desarrollada en .NET, que permite descargar, desde [Spotify](https://www.spotify.com), la información sobre los álbumes y canciones de tus artistas favoritos, mostrando ciertas estadísticas de esta información. Este proyecto fue desarrollado como parte de una evaluación técnica.
 
 ## Uso de la aplicación
 
@@ -37,10 +37,12 @@ Cuando un artista ya ha sido descargado, pero se quiere volver a recuperar su in
 
 
 ## Implementación
+**Spotify Metadata Reader** es una aplicación web implementada utilizando [ASP.NET MVC 5](http://www.asp.net/mvc/mvc5). La integración con la base de datos utiliza [Entity Framework](https://msdn.microsoft.com/en-us/data/ef.aspx), bajo el enfoque [Code-First](https://msdn.microsoft.com/en-us/data/jj193542.aspx).
+
+Durante el desarrollo, también se utilizaron algunas herramientas externas, nombradas al final de esta sección.
 
 ### Módulos de la aplicación
-**Spotify Metadata Reader** es una aplicación web implementada utilizando [ASP.NET MVC 5](http://www.asp.net/mvc/mvc5). La integración con la base de datos utiliza [Entity Framework](https://msdn.microsoft.com/en-us/data/ef.aspx), bajo el enfoque [Code-First](https://msdn.microsoft.com/en-us/data/jj193542.aspx).
-El código consta de una solución compuesta por tres projectos (o módulos):
+El código consta de una solución (.sln) de **Visual Studio 2015** compuesta por tres projectos (o módulos):
 * Domain Model (class library)
 * SpotifyMetadata (class library)
 * WebUI (ASP.NET Web Application)
