@@ -2,6 +2,10 @@
 
 namespace SpotifyMetadata.ResponseModels.Common
 {
+    /// <summary>
+    /// C# version of https://developer.spotify.com/web-api/object-model/#paging-object
+    /// </summary>
+    /// <typeparam name="T">Type of the requested data</typeparam>
     public class Page<T>
     {
         public string href { get; set; }

@@ -1,9 +1,8 @@
 ﻿namespace SpotifyMetadata.ResponseModels.Common
 {
-    //
-    // Clases generadas con http://json2csharp.com/
-    // Usando el string del artista de ejemplo cmo base para el código
-    //
+    /// <summary>
+    /// C# version of https://developer.spotify.com/web-api/object-model/#followers-object
+    /// </summary>
     public class Followers
     {
         public object href { get; set; }

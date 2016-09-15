@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace SpotifyMetadata.ResponseModels.Full
 {
+    /// <summary>
+    /// C# version of https://developer.spotify.com/web-api/object-model/#artist-object-full
+    /// </summary>
     public class Artist
     {
         public ExternalUrls external_urls { get; set; }

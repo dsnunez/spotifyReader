@@ -15,6 +15,7 @@ namespace SpotifyMetadata
         {
             return id == null ? null : db.Artists.FirstOrDefault(a => a.Id == (int)id);
         }
+
         public void DeleteAll()
         {
             db.Tracks.RemoveRange(db.Tracks);

@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace SpotifyMetadata.ResponseModels.Full
 {
+    /// <summary>
+    /// C# version of https://developer.spotify.com/web-api/object-model/#album-object-full
+    /// </summary>
     public class Album
     {
         public string album_type { get; set; }

@@ -10,6 +10,15 @@ namespace SpotifyMetadata
     {
         private string BaseUrl = "https://api.spotify.com/v1/";
 
+        /// <summary>
+        /// Calls the API using the endpoint and parameters specified in req. 
+        /// </summary>
+        /// <param name="req">The endpoint requested and parameters provided. 
+        /// It may or may not include the API's base URL</param>
+        /// <param name="useBaseUrl">It determines if the base URL should be appended to the req, as 
+        /// Spotify's objects sometimes include direct links (that already have the base URL) to other 
+        /// API calls</param>
+        /// <returns></returns>
         private string ApiGetRequest(string req, bool useBaseUrl = true)
         {
             WebClient client = new WebClient();
@@ -25,15 +34,42 @@ namespace SpotifyMetadata
             }
         }
 
+        /// <summary>
+        /// Deserializes a JSON string (that may be empty or null) into a T object. If string is null/empty or 
+        /// does not correspond to the expected type, the default value for type T is returned
+        /// </summary>
+        /// <typeparam name="T">Expected type of the json object</typeparam>
+        /// <param name="json">JSON string to be deserialized</param>
+        /// <returns></returns>
         private T GetObjectFromJson<T>(string json)
         {
+            T obj;
             if (!String.IsNullOrWhiteSpace(json))
             {
-                return JsonConvert.DeserializeObject<T>(json);
+                try
+                {
+                    obj = JsonConvert.DeserializeObject<T>(json);
+                }
+                catch (JsonSerializationException jse)
+                {
+                    obj = default(T);
+                }
             }
-            return default(T);
+            else
+            {
+                obj = default(T);
+            }
+
+            return obj;
         }
 
+        /// <summary>
+        /// Used to download the complete list of results of type T from Spotify, 
+        /// iterating through all of the pages (if Spotify pages the results) 
+        /// </summary>
+        /// <typeparam name="T">Type of the items requested (from the ResponseModel namespace)</typeparam>
+        /// <param name="req">API request that results in a paging object</param>
+        /// <returns></returns>
         private List<T> DownloadCompleteListOf<T>(string req)
         {
             var response = ApiGetRequest(req);
@@ -54,7 +90,7 @@ namespace SpotifyMetadata
             return list;
         }
 
-        private T DownloadFullObject<T>(string req) where T:new()
+        private T DownloadFullObject<T>(string req) where T : new()
         {
             var response = ApiGetRequest(req);
             var obj = GetObjectFromJson<T>(response);

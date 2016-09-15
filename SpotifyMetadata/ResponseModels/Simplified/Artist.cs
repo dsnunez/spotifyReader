@@ -2,6 +2,9 @@
 
 namespace SpotifyMetadata.ResponseModels.Simplified
 {
+    /// <summary>
+    /// C# version of https://developer.spotify.com/web-api/object-model/#artist-object-simplified
+    /// </summary>
     public class Artist
     {
         public ExternalUrls external_urls { get; set; }

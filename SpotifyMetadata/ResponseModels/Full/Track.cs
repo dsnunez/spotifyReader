@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace SpotifyMetadata.ResponseModels.Full
 {
+    /// <summary>
+    /// C# version of https://developer.spotify.com/web-api/object-model/#track-object-full
+    /// </summary>
     public class Track
     {
         public Simplified.Album album { get; set; }
